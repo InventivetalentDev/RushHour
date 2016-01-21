@@ -1,0 +1,10 @@
+name: RushHour
+main: org.inventivetalent.rushhour.RushHour
+author: inventivetalent
+version: ${project.version}
+
+softdepend: [MenuBuilder, ItemBuilder]
+
+commands:
+  rushhour:
+    aliases: [rh]
