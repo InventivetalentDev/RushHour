@@ -94,6 +94,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		setCar(x, y, car.variant.getColor(), displayName, new ItemListener() {
 			@Override
 			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
+				if (player.getUniqueId().equals(InventoryGenerator.this.puzzle.player.getUniqueId())) { throw new IllegalStateException(); }
 				listener.onInteract(player, clickType);
 			}
 		});
@@ -124,6 +125,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	}
 
 	public void showTo(Player player) {
+		this.puzzle.player = player;
 		this.menuBuilder.show(player);
 	}
 

@@ -44,6 +44,8 @@ public class Puzzle {
 	//Solution the player used
 	public Solution playerSolution = new Solution();
 
+	public Player player;
+
 	public AbstractPuzzleGenerator generator;
 
 	public Puzzle() {
@@ -98,6 +100,7 @@ public class Puzzle {
 				generator.setCar(x, y, car, direction, new CarInteractListener() {
 					@Override
 					public void onInteract(Player player, ClickType clickType) {
+						if (player != Puzzle.this.player) { throw new IllegalStateException(); }
 						if (finalDirection != null) {
 							moveCar(car, finalDirection);
 						}
@@ -116,8 +119,6 @@ public class Puzzle {
 			return;
 		}
 		car.bounds = target;
-		//		car.currentX = car.currentX + direction.getShiftX();
-		//		car.currentY = car.currentY + direction.getShiftY();
 
 		System.out.println("Car " + car + " moved " + direction + " (from " + prevBounds.x() + "|" + prevBounds.y() + " to " + target.x() + "|" + target.y() + " )");
 
