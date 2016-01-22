@@ -52,7 +52,7 @@ public class RushHour extends JavaPlugin {
 				.withMessage("inventory.title", "&c&lRush&e&lHour  &8\"%s\"&r  %s")//
 				.withMessage("inventory.game.finished.inner", " &2Game Finished! ")//
 				.withMessage("inventory.game.finished.outer", " &aGame Finished! ")//
-				.withMessage("inventory.game.finished.time", "&7You finished this puzzle in &e%s&7!")//
+				.withMessage("inventory.game.finished.time", "&7You finished this puzzle in &e%d:%02d:%02d&7!")//
 				.withMessage("inventory.game.solution.show", "&aShow solution")//
 				.withMessage("inventory.game.moves", "&7Moves: &e%s")//
 				.withMessage("inventory.game.move.disabled.left", " &7< ")//
