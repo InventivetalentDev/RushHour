@@ -15,7 +15,7 @@ public class GameCar extends Car {
 
 	@Override
 	public String toString() {
-		return "GameCar[v=" + variant.name() + "]@[(" + (int) bounds.getMinX() + "|" + (int) bounds.getMinY() + ")-(" + (int) bounds.getMaxX() + "|" + (int) bounds.getMaxY() + ")]#" + hashCode();
+		return "GameCar[v=" + variant.name() + "]@[" + bounds.toString() + "]#" + hashCode();
 	}
 
 	@Override

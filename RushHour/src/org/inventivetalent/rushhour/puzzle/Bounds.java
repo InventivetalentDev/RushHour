@@ -64,4 +64,8 @@ public class Bounds extends Rectangle {
 				this.getMinY() <= other.getMaxY();
 	}
 
+	@Override
+	public String toString() {
+		return "Bounds(" + (int) getMinX() + "|" + (int) getMinY() + ")(" + (int) getMaxX() + "|" + (int) getMaxY() + ")";
+	}
 }
