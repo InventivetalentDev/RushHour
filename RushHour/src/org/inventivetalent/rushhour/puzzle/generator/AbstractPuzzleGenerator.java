@@ -1,7 +1,7 @@
 package org.inventivetalent.rushhour.puzzle.generator;
 
-import org.inventivetalent.rushhour.car.Variant;
 import org.inventivetalent.rushhour.puzzle.Direction;
+import org.inventivetalent.rushhour.puzzle.GameCar;
 import org.inventivetalent.rushhour.puzzle.Puzzle;
 
 import java.io.File;
@@ -20,8 +20,7 @@ public abstract class AbstractPuzzleGenerator {
 		loadPuzzle(Puzzle.fromJson(new FileReader(file)));
 	}
 
-	public abstract void setCar(int x, int y, Variant variant,Direction moveDirection, CarInteractListener listener);
-
+	public abstract void setCar(int x, int y, GameCar car, Direction moveDirection, CarInteractListener listener);
 
 	public void clearCars() {
 	}
