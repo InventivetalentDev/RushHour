@@ -34,6 +34,7 @@ public class Solution {
 		new BukkitRunnable() {
 			final List<Move> moveList = new ArrayList<>(moves);
 			int currentMove = 0;
+			int currentMoveStep = 0;
 
 			@Override
 			public void run() {
@@ -43,9 +44,14 @@ public class Solution {
 				}
 
 				Move move = moveList.get(currentMove);
-				move.executeMove(puzzle);
+				if (currentMoveStep >= move.moves) {
+					currentMove += 1;
+					currentMoveStep = 0;
+					return;
+				}
 
-				currentMove += 1;
+				move.executeSingleMove(puzzle);
+				currentMoveStep += 1;
 			}
 		}.runTaskTimer(Bukkit.getPluginManager().getPlugin("RushHour"), interval, interval);
 	}
