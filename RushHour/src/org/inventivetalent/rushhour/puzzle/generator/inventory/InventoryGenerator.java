@@ -81,8 +81,8 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 		//Level information
 		ItemBuilder levelInfoBuilder = new ItemBuilder(Material.SIGN, 1);
-		MetaBuilder levelInfoMetaBuilder = levelInfoBuilder.buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.level.name", puzzle.name)).withLore(//
-				RushHour.messageContainer.getMessage("inventory.game.level.difficulty", puzzle.difficulty)//
+		MetaBuilder levelInfoMetaBuilder = new MetaBuilder(levelInfoBuilder).withDisplayName(RushHour.messageContainer.getMessage("inventory.game.level.name", puzzle != null ? puzzle.name : "")).withLore(//
+				RushHour.messageContainer.getMessage("inventory.game.level.difficulty", puzzle != null ? puzzle.difficulty : "")//
 		);
 		levelInfoBuilder = levelInfoMetaBuilder.item();
 		this.menuBuilder.withItem(44, levelInfoBuilder.build(), new ItemListener() {
@@ -163,7 +163,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		puzzle.initializeCars();
 		puzzle.addCarsToInventory(this);
 
-//		this.menuBuilder.withTitle(RushHour.messageContainer.getMessage("inventory.title", this.puzzle.name, this.puzzle.difficulty)  /*"§c§lRush§e§lHour  §8\"" + this.puzzle.name + "\"§r  " + this.puzzle.difficulty*/);
+		//		this.menuBuilder.withTitle(RushHour.messageContainer.getMessage("inventory.title", this.puzzle.name, this.puzzle.difficulty)  /*"§c§lRush§e§lHour  §8\"" + this.puzzle.name + "\"§r  " + this.puzzle.difficulty*/);
 		this.menuBuilder.withTitle(RushHour.messageContainer.getMessage("inventory.title")  /*"§c§lRush§e§lHour  §8\"" + this.puzzle.name + "\"§r  " + this.puzzle.difficulty*/);
 	}
 
