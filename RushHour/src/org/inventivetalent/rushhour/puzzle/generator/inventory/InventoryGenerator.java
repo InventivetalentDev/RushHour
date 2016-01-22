@@ -145,7 +145,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 	public void loadPuzzle(File file) throws IOException {
 		Puzzle puzzle = Puzzle.fromJson(new FileReader(file));
-		if (puzzle.name == null || puzzle.name.isEmpty()) { puzzle.name = file.getName(); }
+		if (puzzle.name == null || puzzle.name.isEmpty()) { puzzle.name = file.getName().substring(0, file.getName().length() - ".rh".length()); }
 		loadPuzzle(puzzle);
 	}
 
