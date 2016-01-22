@@ -4,7 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.inventivetalent.rushhour.inventory.InventoryGenerator;
+import org.inventivetalent.rushhour.puzzle.generator.inventory.InventoryGenerator;
 
 import java.io.File;
 import java.io.IOException;

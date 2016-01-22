@@ -4,13 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.ItemStack;
-import org.inventivetalent.menubuilder.MenuBuilderPlugin;
-import org.inventivetalent.menubuilder.inventory.ItemListener;
 import org.inventivetalent.rushhour.car.Car;
 import org.inventivetalent.rushhour.car.Rotation;
 import org.inventivetalent.rushhour.car.Variant;
-import org.inventivetalent.rushhour.inventory.InventoryGenerator;
+import org.inventivetalent.rushhour.puzzle.generator.CarInteractListener;
+import org.inventivetalent.rushhour.puzzle.generator.AbstractPuzzleGenerator;
 
 import java.io.Reader;
 import java.io.Writer;
@@ -40,7 +38,7 @@ public class Puzzle {
 	public Difficulty difficulty;
 	public Set<GameCar> cars = new HashSet<>();
 
-	public InventoryGenerator generator;
+	public AbstractPuzzleGenerator generator;
 
 	public Puzzle() {
 	}
@@ -51,13 +49,15 @@ public class Puzzle {
 		}
 	}
 
-	public void addCarsToInventory(InventoryGenerator generator) {
+	public void addCarsToInventory(AbstractPuzzleGenerator generator) {
 		this.generator = generator;
 
 		//Clear all old listeners
-		MenuBuilderPlugin.instance.inventoryListener.unregisterAllListeners(generator.menuBuilder.getInventory());
+		//		MenuBuilderPlugin.instance.inventoryListener.unregisterAllListeners(generator.menuBuilder.getInventory());
+		generator.resetListeners();
 		//Remove all old items
-		generator.menuBuilder.getInventory().clear();
+		//		generator.menuBuilder.getInventory().clear();
+		generator.clearCars();
 
 		generator.generateBase();
 
@@ -73,28 +73,34 @@ public class Puzzle {
 					if (x != 6 || y != 2) { continue; }
 				}
 
-				generator.setCar(x, y, car.variant.getColor(), new ItemListener() {
+				Direction direction = null;
+				if (j == 0) {//Move left/up
+					if (car.rotation == Rotation.HORIZONTAL) {//Left
+						direction = Direction.LEFT;
+					} else if (car.rotation == Rotation.VERTICAL) {//Up
+						direction = Direction.UP;
+					}
+				} else if (j == length - 1) {//Move right/down
+					if (car.rotation == Rotation.HORIZONTAL) {//Right
+						direction = Direction.RIGHT;
+					} else if (car.rotation == Rotation.VERTICAL) {//Down
+						direction = Direction.DOWN;
+					}
+				}
+
+				final Direction finalDirection = direction;
+				generator.setCar(x, y, car.variant, direction, new CarInteractListener() {
 					@Override
-					public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
-						if (j == 0) {//Move left/up
-							if (car.rotation == Rotation.HORIZONTAL) {//Left
-								moveCar(car, Direction.LEFT);
-							} else if (car.rotation == Rotation.VERTICAL) {//Up
-								moveCar(car, Direction.UP);
-							}
-						} else if (j == length - 1) {//Move right/down
-							if (car.rotation == Rotation.HORIZONTAL) {//Right
-								moveCar(car, Direction.RIGHT);
-							} else if (car.rotation == Rotation.VERTICAL) {//Down
-								moveCar(car, Direction.DOWN);
-							}
+					public void onInteract(Player player, ClickType clickType) {
+						if (finalDirection != null) {
+							moveCar(car, Direction.DOWN);
 						}
 					}
 				});
 			}
 		}
 
-		generator.menuBuilder.refreshContent();
+		generator.updateCars();
 	}
 
 	public void moveCar(GameCar car, Direction direction) {
