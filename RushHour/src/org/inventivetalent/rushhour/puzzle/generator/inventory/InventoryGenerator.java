@@ -57,9 +57,19 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	}
 
 	public void generateBase() {
+		if (this.finished) {
+			for (int i = 0; i < menuBuilder.getInventory().getSize(); i++) {
+				menuBuilder.withItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.WHITE.getData()).buildMeta().withDisplayName(" §2Game Finished! ").item().build(), new ItemListener() {
+					@Override
+					public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
+					}
+				}, InventoryMenuBuilder.ALL_CLICK_TYPES);
+			}
+		}
+
 		for (int i : WALL_SLOTS) {
 			this.menuBuilder.withItem(i,//
-					new ItemBuilder(Material.STAINED_GLASS_PANE, 1, finished ? DyeColor.LIME.getData() : DyeColor.GRAY.getData()).buildMeta().withDisplayName(finished ? " §aGame Finished " : " ").item().build(), new ItemListener() {
+					new ItemBuilder(Material.STAINED_GLASS_PANE, 1, finished ? DyeColor.GREEN.getData() : DyeColor.GRAY.getData()).buildMeta().withDisplayName(finished ? " §aGame Finished " : " ").item().build(), new ItemListener() {
 						@Override
 						public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
 						}
@@ -71,6 +81,38 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
 			}
 		}, InventoryMenuBuilder.ALL_CLICK_TYPES);
+
+		if (this.finished) {
+			int[] R_SLOTS = new int[] {
+					10,
+					11,
+					12,
+					19,
+					21,
+					28,
+					29,
+					37,
+					39 };
+			int[] H_SLOTS = new int[] {
+					13,
+					15,
+					22,
+					23,
+					24,
+					31,
+					33,
+					40,
+					42 };
+
+			for (int r : R_SLOTS) {
+				this.menuBuilder.withItem(r, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.RED.getData()).buildMeta().withDisplayName(" §2Game Finished! ").item().build());
+			}
+
+			for (int h : H_SLOTS) {
+				this.menuBuilder.withItem(h, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.YELLOW.getData()).buildMeta().withDisplayName(" §2Game Finished! ").item().build());
+			}
+
+		}
 	}
 
 	public void loadPuzzle(Puzzle puzzle) {
@@ -122,7 +164,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 		int index = x + (y * 9);
 		this.menuBuilder.withItem(index,//
-				new ItemBuilder(Material.WOOL, 1, color.getData()).buildMeta().withDisplayName(displayName).item().build(), listener, InventoryMenuBuilder.ALL_CLICK_TYPES);
+				new ItemBuilder(Material.STAINED_CLAY, 1, color.getData()).buildMeta().withDisplayName(displayName).item().build(), listener, InventoryMenuBuilder.ALL_CLICK_TYPES);
 	}
 
 	@Override
@@ -151,15 +193,8 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 		resetListeners();
 
-		for (int i = 0; i < menuBuilder.getInventory().getSize(); i++) {
-			menuBuilder.withItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.GREEN.getData()).buildMeta().withDisplayName(" §2Game Finished! ").item().build(), new ItemListener() {
-				@Override
-				public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
-				}
-			}, InventoryMenuBuilder.ALL_CLICK_TYPES);
-		}
-
 		generateBase();
+
 	}
 
 	@Override
