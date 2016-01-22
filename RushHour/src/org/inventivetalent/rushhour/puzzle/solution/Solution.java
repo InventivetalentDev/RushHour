@@ -85,6 +85,13 @@ public class Solution {
 		return solution;
 	}
 
+	public long getDuration() {
+		if (this.moves.isEmpty()) { return 0L; }
+		long start = this.moves.get(0).timestamp;
+		long end = this.moves.get(this.moves.size() - 1).timestamp;
+		return end - start;
+	}
+
 	public JsonArray toJsonArray() {
 		JsonArray array = new JsonArray();
 		for (Move move : this.moves) {
