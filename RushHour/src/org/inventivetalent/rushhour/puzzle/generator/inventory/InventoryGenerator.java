@@ -45,7 +45,9 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 	public InventoryMenuBuilder menuBuilder;
 	public Puzzle               puzzle;
-	public int moveCount = 0;
+
+	public int     moveCount = 0;
+	public boolean finished  = false;
 
 	public InventoryGenerator() {
 		this.menuBuilder = new InventoryMenuBuilder(6 * 9, "RushHour"/*TODO: Title*/);
@@ -54,7 +56,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	public void generateBase() {
 		for (int i : WALL_SLOTS) {
 			this.menuBuilder.withItem(i,//
-					new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.GRAY.getData()).buildMeta().withDisplayName(" ").item().build(), new ItemListener() {
+					new ItemBuilder(Material.STAINED_GLASS_PANE, 1, finished ? DyeColor.LIME.getData() : DyeColor.GRAY.getData()).buildMeta().withDisplayName(finished ? " §aGame Finished " : " ").item().build(), new ItemListener() {
 						@Override
 						public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
 						}
@@ -80,6 +82,9 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 	@Override
 	public void setCar(int x, int y, GameCar car, Direction moveDirection, final CarInteractListener listener) {
+		//Don't change the cars if the game is already finished
+		if (this.finished) { return; }
+
 		String displayName = " ";
 		if (moveDirection != null) {
 			boolean canMove = puzzle.checkCollision(car, car.bounds.shift(moveDirection));
@@ -136,6 +141,23 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	public void updateMoves(int moves) {
 		this.moveCount = moves;
 		//		this.menuBuilder.withTitle("RushHour | Moves: " + moves);//TODO: Title
+	}
+
+	@Override
+	public void gameFinished() {
+		this.finished = true;
+
+		resetListeners();
+
+		for (int i = 0; i < menuBuilder.getInventory().getSize(); i++) {
+			menuBuilder.withItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.GREEN.getData()).buildMeta().withDisplayName(" §2Game Finished! ").item().build(), new ItemListener() {
+				@Override
+				public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
+				}
+			}, InventoryMenuBuilder.ALL_CLICK_TYPES);
+		}
+
+		generateBase();
 	}
 
 	public void showTo(Player player) {
