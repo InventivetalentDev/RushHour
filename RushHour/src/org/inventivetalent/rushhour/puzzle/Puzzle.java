@@ -100,7 +100,7 @@ public class Puzzle {
 				generator.setCar(x, y, car, direction, new CarInteractListener() {
 					@Override
 					public void onInteract(Player player, ClickType clickType) {
-						if (player != Puzzle.this.player) { throw new IllegalStateException(); }
+						if (!player.getUniqueId().equals(Puzzle.this.player.getUniqueId())) { throw new IllegalStateException(); }
 						if (finalDirection != null) {
 							moveCar(car, finalDirection);
 						}
