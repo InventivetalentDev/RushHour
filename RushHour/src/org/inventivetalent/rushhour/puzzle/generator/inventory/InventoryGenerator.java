@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.inventivetalent.itembuilder.ItemBuilder;
 import org.inventivetalent.menubuilder.MenuBuilderPlugin;
 import org.inventivetalent.menubuilder.inventory.InventoryMenuBuilder;
@@ -146,7 +147,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	}
 
 	@Override
-	public void gameFinished(boolean wasSolution) {
+	public void gameFinished(boolean solved, boolean wasSolution) {
 		this.finished = true;
 
 		resetListeners();
@@ -171,6 +172,9 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 		if (!event.isCancelled()) {
 			this.menuBuilder.show(player);
+
+			player.setMetadata("RUSHHOUR_GENERATOR", new FixedMetadataValue(Bukkit.getPluginManager().getPlugin("RushHour"), this));
+			player.setMetadata("RUSHHOUR_PUZZLE", new FixedMetadataValue(Bukkit.getPluginManager().getPlugin("RushHour"), puzzle));
 		} else {
 			clearCars();
 			resetListeners();
