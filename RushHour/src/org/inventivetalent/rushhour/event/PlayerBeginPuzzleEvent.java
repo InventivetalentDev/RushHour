@@ -4,6 +4,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.inventivetalent.rushhour.puzzle.Puzzle;
 
+/**
+ * Event called when a player starts to play a puzzle
+ */
 public class PlayerBeginPuzzleEvent extends RushHourEvent implements Cancellable {
 
 	private Player player;
