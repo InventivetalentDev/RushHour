@@ -186,6 +186,10 @@ public class Puzzle {
 		isFinished = true;
 	}
 
+	public String getLevelPerm() {
+		return this.name.replace("/", ".");
+	}
+
 	public void toJson(Writer writer) {
 		GSON.toJson(this, writer);
 	}
