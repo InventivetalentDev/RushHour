@@ -38,6 +38,7 @@ public class Puzzle {
 	public String     name;
 	public Difficulty difficulty;
 	public Set<GameCar> cars = new HashSet<>();
+	public Solution solution;
 
 	public AbstractPuzzleGenerator generator;
 
