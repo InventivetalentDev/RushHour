@@ -55,6 +55,7 @@
                                     <include>org.inventivetalent:rushhour**</include>
                                     <include>org.inventivetalent:menubuilder**</include>
                                     <include>org.inventivetalent:itembuilder**</include>
+                                    <include>org.inventivetalent:messagebuilder**</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
@@ -102,6 +103,11 @@
             <groupId>org.inventivetalent</groupId>
             <artifactId>itembuilder</artifactId>
             <version>1.0.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.inventivetalent</groupId>
+            <artifactId>messagebuilder</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>
