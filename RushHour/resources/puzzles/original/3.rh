@@ -1,0 +1,57 @@
+{
+  "difficulty": "BEGINNER",
+  "cars": [
+    {
+      "x": 1,
+      "y": 2,
+      "variant": "MAIN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "variant": "C_LIME",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "variant": "C_ORANGE",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "variant": "T_YELLOW",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "variant": "C_BLUE",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "variant": "T_PINK",
+      "rotation": "VERTICAL"
+    }
+  ],
+  "solution": [
+    "PU3",
+    "OU2",
+    "CR2",
+    "AR3",
+    "OD3",
+    "XR1",
+    "BU4",
+    "XL1",
+    "OU3",
+    "CL3",
+    "AL3",
+    "PD3",
+    "OD3",
+    "XR5"
+  ]
+}
