@@ -51,8 +51,10 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	public InventoryMenuBuilder menuBuilder;
 	public Puzzle               puzzle;
 
-	public int     moveCount = 0;
-	public boolean finished  = false;
+	public int moveCount         = 0;
+	public int combinedMoveCount = 0;
+
+	public boolean finished = false;
 
 	public InventoryGenerator() {
 		this.menuBuilder = new InventoryMenuBuilder(6 * 9, "§c§lRush§e§lHour");
@@ -92,8 +94,8 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		}, InventoryMenuBuilder.ALL_CLICK_TYPES);
 
 		//Moves information
-		ItemBuilder infoBuilder = new ItemBuilder(Material.WATCH, this.moveCount);
-		MetaBuilder infoMetaBuilder = infoBuilder.buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.moves", this.moveCount)/*"§7Moves: §e" + this.moveCount*/);
+		ItemBuilder infoBuilder = new ItemBuilder(Material.WATCH, this.combinedMoveCount);
+		MetaBuilder infoMetaBuilder = infoBuilder.buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.moves", this.combinedMoveCount, this.moveCount)/*"§7Moves: §e" + this.moveCount*/);
 		if (this.finished) {
 			double s = this.puzzle.playerSolution.getDuration() / 1000.0D;
 			infoMetaBuilder.withLore(RushHour.messageContainer.getMessage("inventory.game.finished.time", (int) (s / 3600), (int) ((s % 3600) / 60), (int) (s % 60))  /*"§7You finished this puzzle in §e" + String.format("%d:%02d:%02d", (int) (s / 3600), (int) ((s % 3600) / 60), (int) (s % 60)) + "§7!"*/);
@@ -234,8 +236,9 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	}
 
 	@Override
-	public void updateMoves(int moves) {
-		this.moveCount = moves;
+	public void updateMoves(int combinedMoves, int individualMoves) {
+		this.combinedMoveCount = combinedMoves;
+		this.moveCount = individualMoves;
 	}
 
 	@Override

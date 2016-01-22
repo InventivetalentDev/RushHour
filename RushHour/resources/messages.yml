@@ -21,7 +21,7 @@ inventory:
       time: "&7You finished this puzzle in &e%d:%02d:%02d&7!"
     solution:
       show: "&aShow solution"
-    moves: "&7Moves: &e%s"
+    moves: "&7Moves: &e%s (%s)"
     level:
       name: "&7Level: &e%s"
       difficulty: "&7Difficulty: %s"

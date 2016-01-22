@@ -128,7 +128,7 @@ public class Puzzle {
 		System.out.println("Car " + car + " moved " + direction + " (from " + prevBounds.x() + "|" + prevBounds.y() + " to " + target.x() + "|" + target.y() + " )");
 
 		playerSolution.trackPlayerMove(null, car.variant, direction, 1);
-		generator.updateMoves(playerSolution.moves.size());
+		generator.updateMoves(playerSolution.combineMoves().moves.size(), playerSolution.moves.size());
 
 		if (FINISH_BOUNDS.collidesWith(target)) {
 			if (car.variant == Variant.MAIN) {

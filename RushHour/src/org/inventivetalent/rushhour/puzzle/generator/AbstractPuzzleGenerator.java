@@ -32,7 +32,7 @@ public abstract class AbstractPuzzleGenerator {
 	public void updateCars() {
 	}
 
-	public void updateMoves(int moves) {
+	public void updateMoves(int combinedMoves,int individualMoves) {
 	}
 
 	public void gameFinished(boolean solved, boolean wasSolution) {
