@@ -157,7 +157,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		String displayName = " ";
 		if (moveDirection != null) {
 			boolean canMove = puzzle.checkCollision(car, car.bounds.shift(moveDirection));
-			displayName = RushHour.messageContainer.getMessage("inventory.game.move." + (canMove ? "enabled" : "disabled")) + "." + moveDirection.name().toLowerCase();
+			displayName = RushHour.messageContainer.getMessage("inventory.game.move." + (canMove ? "enabled" : "disabled") + "." + moveDirection.name().toLowerCase());
 			//			switch (moveDirection) {
 			//				case LEFT:
 			//					if (canMove) { displayName = " §e< "; } else { displayName = " §7< "; }
