@@ -12,6 +12,7 @@ import org.inventivetalent.itembuilder.MetaBuilder;
 import org.inventivetalent.menubuilder.MenuBuilderPlugin;
 import org.inventivetalent.menubuilder.inventory.InventoryMenuBuilder;
 import org.inventivetalent.menubuilder.inventory.ItemListener;
+import org.inventivetalent.rushhour.RushHour;
 import org.inventivetalent.rushhour.event.PlayerBeginPuzzleEvent;
 import org.inventivetalent.rushhour.puzzle.Direction;
 import org.inventivetalent.rushhour.puzzle.GameCar;
@@ -36,7 +37,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 			/* Right border */
 			7,
-			/*8,*/
+			8/*Solution item; Keep it anyway, since it will only appear if the player has permissions*/,
 			16,
 			17,
 			/* 25 <- Exit hole */
@@ -60,7 +61,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	public void generateBase() {
 		if (this.finished) {
 			for (int i = 0; i < menuBuilder.getInventory().getSize(); i++) {
-				menuBuilder.withItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.WHITE.getData()).buildMeta().withDisplayName(" §2Game Finished! ").item().build(), new ItemListener() {
+				menuBuilder.withItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.WHITE.getData()).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.finished.inner")).item().build(), new ItemListener() {
 					@Override
 					public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
 					}
@@ -71,7 +72,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		//Walls
 		for (int i : WALL_SLOTS) {
 			this.menuBuilder.withItem(i,//
-					new ItemBuilder(Material.STAINED_GLASS_PANE, 1, finished ? DyeColor.GREEN.getData() : DyeColor.GRAY.getData()).buildMeta().withDisplayName(finished ? " §aGame Finished " : " ").item().build(), new ItemListener() {
+					new ItemBuilder(Material.STAINED_GLASS_PANE, 1, finished ? DyeColor.GREEN.getData() : DyeColor.GRAY.getData()).buildMeta().withDisplayName(finished ? RushHour.messageContainer.getMessage("inventory.game.finished.outer") : " ").item().build(), new ItemListener() {
 						@Override
 						public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
 						}
@@ -80,10 +81,10 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 		//Moves information
 		ItemBuilder infoBuilder = new ItemBuilder(Material.WATCH, this.moveCount);
-		MetaBuilder infoMetaBuilder = infoBuilder.buildMeta().withDisplayName("§7Moves: §e" + this.moveCount);
+		MetaBuilder infoMetaBuilder = infoBuilder.buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.moves", this.moveCount)/*"§7Moves: §e" + this.moveCount*/);
 		if (this.finished) {
 			double s = this.puzzle.playerSolution.getDuration() / 1000.0D;
-			infoMetaBuilder.withLore(new String[] { "§7You finished this puzzle in §e" + String.format("%d:%02d:%02d", (int) (s / 3600), (int) ((s % 3600) / 60), (int) (s % 60)) + "§7!" });
+			infoMetaBuilder.withLore(RushHour.messageContainer.getMessage("inventory.game.finished.time", (int) (s / 3600), (int) ((s % 3600) / 60), (int) (s % 60))  /*"§7You finished this puzzle in §e" + String.format("%d:%02d:%02d", (int) (s / 3600), (int) ((s % 3600) / 60), (int) (s % 60)) + "§7!"*/);
 		}
 		infoBuilder = infoMetaBuilder.item();
 		this.menuBuilder.withItem(53, infoBuilder.build(), new ItemListener() {
@@ -94,7 +95,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 		//Help item
 		//TODO: Check permission before adding
-		this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, 1).buildMeta().withDisplayName("§aShow solution").item().build(), new ItemListener() {
+		this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, 1).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.solution.show")).item().build(), new ItemListener() {
 			@Override
 			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
 				//TODO: Check permission
@@ -124,11 +125,11 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 					42 };
 
 			for (int r : R_SLOTS) {
-				this.menuBuilder.withItem(r, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.RED.getData()).buildMeta().withDisplayName(" §2Game Finished! ").item().build());
+				this.menuBuilder.withItem(r, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.RED.getData()).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.finished.inner")).item().build());
 			}
 
 			for (int h : H_SLOTS) {
-				this.menuBuilder.withItem(h, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.YELLOW.getData()).buildMeta().withDisplayName(" §2Game Finished! ").item().build());
+				this.menuBuilder.withItem(h, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, DyeColor.YELLOW.getData()).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.finished.inner")).item().build());
 			}
 
 		}
@@ -139,7 +140,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		puzzle.initializeCars();
 		puzzle.addCarsToInventory(this);
 
-		this.menuBuilder.withTitle("§c§lRush§e§lHour  §8\"" + this.puzzle.name + "\"§r  " + this.puzzle.difficulty);
+		this.menuBuilder.withTitle(RushHour.messageContainer.getMessage("inventory.title", this.puzzle.name, this.puzzle.difficulty)  /*"§c§lRush§e§lHour  §8\"" + this.puzzle.name + "\"§r  " + this.puzzle.difficulty*/);
 	}
 
 	public void loadPuzzle(File file) throws IOException {
@@ -156,20 +157,21 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		String displayName = " ";
 		if (moveDirection != null) {
 			boolean canMove = puzzle.checkCollision(car, car.bounds.shift(moveDirection));
-			switch (moveDirection) {
-				case LEFT:
-					if (canMove) { displayName = " §e< "; } else { displayName = " §7< "; }
-					break;
-				case RIGHT:
-					if (canMove) { displayName = " §e> "; } else { displayName = " §7> "; }
-					break;
-				case UP:
-					if (canMove) { displayName = " §e^ "; } else { displayName = " §7^ "; }
-					break;
-				case DOWN:
-					if (canMove) { displayName = " §ev "; } else { displayName = " §7v "; }
-					break;
-			}
+			displayName = RushHour.messageContainer.getMessage("inventory.game.move." + (canMove ? "enabled" : "disabled")) + "." + moveDirection.name().toLowerCase();
+			//			switch (moveDirection) {
+			//				case LEFT:
+			//					if (canMove) { displayName = " §e< "; } else { displayName = " §7< "; }
+			//					break;
+			//				case RIGHT:
+			//					if (canMove) { displayName = " §e> "; } else { displayName = " §7> "; }
+			//					break;
+			//				case UP:
+			//					if (canMove) { displayName = " §e^ "; } else { displayName = " §7^ "; }
+			//					break;
+			//				case DOWN:
+			//					if (canMove) { displayName = " §ev "; } else { displayName = " §7v "; }
+			//					break;
+			//			}
 		}
 
 		setCar(x, y, car.variant.getColor(), displayName, new ItemListener() {

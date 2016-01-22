@@ -11,3 +11,25 @@ command:
       permission:
         command: "&cYou are not permitted to use this command"
         level: "&cYou are not permitted to play this level"
+
+inventory:
+  title: "&c&lRush&e&lHour  &8\"%s\"&r  %s"
+  game:
+    finished:
+      inner: " &2Game Finished! "
+      outer: " &aGame Finished! "
+      time: "&7You finished this puzzle in &e%d:$02d:%02d&7!"
+    solution:
+      show: "&aShow solution"
+    moves: "&7Moves: &e%s"
+    move:
+      disabled:
+        left: " &7< "
+        right: " &7> "
+        up: " &7^ "
+        down: " &7v "
+      enabled:
+        left: " &e< "
+        right: " &e> "
+        up: " &e^ "
+        down: " &ev "

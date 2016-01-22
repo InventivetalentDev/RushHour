@@ -22,7 +22,7 @@ public class RushHour extends JavaPlugin {
 	File puzzleFolder = new File(getDataFolder(), "puzzles");
 	File messagesFile = new File(getDataFolder(), "messages.yml");
 
-	public MessageContainer messageContainer;
+	public static MessageContainer messageContainer;
 
 	@Override
 	public void onEnable() {
@@ -40,7 +40,7 @@ public class RushHour extends JavaPlugin {
 			saveResource("messages.yml", false);
 		}
 
-		this.messageContainer = new MessageBuilder()//
+		messageContainer = new MessageBuilder()//
 				.withMessage("command.play.help", "&aPlay a specific level")//
 				.withMessage("command.play.info.loading", "&aLoading level %s...")//
 				.withMessage("command.play.error.level.missing", "&cPlease specify the level name")//
@@ -48,6 +48,21 @@ public class RushHour extends JavaPlugin {
 				.withMessage("command.play.error.noPlayer", "&cYou must be a player to play")//
 				.withMessage("command.play.error.permission.command", "&cYou are not permitted to use this command")//
 				.withMessage("command.play.error.permission.level", "&cYou are not permitted to play this level")//
+
+				.withMessage("inventory.title", "&c&lRush&e&lHour  &8\"%s\"&r  %s")//
+				.withMessage("inventory.game.finished.inner", " &2Game Finished! ")//
+				.withMessage("inventory.game.finished.outer", " &aGame Finished! ")//
+				.withMessage("inventory.game.finished.time", "&7You finished this puzzle in &e%s&7!")//
+				.withMessage("inventory.game.solution.show", "&aShow solution")//
+				.withMessage("inventory.game.moves", "&7Moves: &e%s")//
+				.withMessage("inventory.game.move.disabled.left", " &7< ")//
+				.withMessage("inventory.game.move.disabled.right", " &7> ")//
+				.withMessage("inventory.game.move.disabled.up", " &7^ ")//
+				.withMessage("inventory.game.move.disabled.down", " &7v ")//
+				.withMessage("inventory.game.move.enabled.left", " &e< ")//
+				.withMessage("inventory.game.move.enabled.right", " &e> ")//
+				.withMessage("inventory.game.move.enabled.up", " &e^ ")//
+				.withMessage("inventory.game.move.enabled.down", " &ev ")//
 
 				.fromConfig(YamlConfiguration.loadConfiguration(messagesFile)).build();
 
@@ -59,7 +74,7 @@ public class RushHour extends JavaPlugin {
 		if (args.length == 0) {
 			if (sender.hasPermission("rushhour.play")) {
 				sender.sendMessage("  ");
-				sender.sendMessage(this.messageContainer.getMessage("command.play.help"));
+				sender.sendMessage(messageContainer.getMessage("command.play.help"));
 				sender.sendMessage("§e/rushhour play <level name>");
 			}
 			if (sender.hasPermission("rushhour.spectate")) {
