@@ -94,7 +94,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		}, InventoryMenuBuilder.ALL_CLICK_TYPES);
 
 		//Help item
-		if (this.puzzle.player != null && this.puzzle.player.hasPermission("rushhour.solution." + this.puzzle.getLevelPerm())) {
+		if (this.puzzle != null && this.puzzle.player != null && this.puzzle.player.hasPermission("rushhour.solution." + this.puzzle.getLevelPerm())) {
 			this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, 1).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.solution.show")).item().build(), new ItemListener() {
 				@Override
 				public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
