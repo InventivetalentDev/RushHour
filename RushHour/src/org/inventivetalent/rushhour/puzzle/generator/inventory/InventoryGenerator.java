@@ -40,11 +40,12 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 			35,
 			43,
 			44,
-			52,
-			53 };
+			52
+			/*53*/ };
 
 	public InventoryMenuBuilder menuBuilder;
 	public Puzzle               puzzle;
+	public int moveCount = 0;
 
 	public InventoryGenerator() {
 		this.menuBuilder = new InventoryMenuBuilder(6 * 9, "RushHour"/*TODO: Title*/);
@@ -59,6 +60,12 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 						}
 					}, InventoryMenuBuilder.ALL_CLICK_TYPES);
 		}
+
+		this.menuBuilder.withItem(53, new ItemBuilder(Material.WATCH, this.moveCount).buildMeta().withDisplayName("§7Moves: §e" + this.moveCount).item().build(), new ItemListener() {
+			@Override
+			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
+			}
+		}, InventoryMenuBuilder.ALL_CLICK_TYPES);
 	}
 
 	public void loadPuzzle(Puzzle puzzle) {
@@ -127,7 +134,8 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 	@Override
 	public void updateMoves(int moves) {
-		this.menuBuilder.withTitle("RushHour | Moves: " + moves);//TODO: Title
+		this.moveCount = moves;
+		//		this.menuBuilder.withTitle("RushHour | Moves: " + moves);//TODO: Title
 	}
 
 	public void showTo(Player player) {
