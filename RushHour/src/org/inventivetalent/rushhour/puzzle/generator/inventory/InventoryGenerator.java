@@ -94,6 +94,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		}, InventoryMenuBuilder.ALL_CLICK_TYPES);
 
 		//Help item
+		System.out.println(this.puzzle.getLevelPerm());
 		if (this.puzzle != null && this.puzzle.player != null && this.puzzle.player.hasPermission("rushhour.solution." + this.puzzle.getLevelPerm())) {
 			this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, 1).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.solution.show")).item().build(), new ItemListener() {
 				@Override
@@ -156,7 +157,9 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 	public void loadPuzzle(File file) throws IOException {
 		Puzzle puzzle = Puzzle.fromJson(new FileReader(file));
-		if (puzzle.name == null || puzzle.name.isEmpty()) { puzzle.name = file.getName().substring(0, file.getName().length() - ".rh".length()); }
+
+		String puzzleName = file.getAbsolutePath().substring(file.getAbsolutePath().indexOf("/plugins/RushHour/puzzles/"));
+		if (puzzle.name == null || puzzle.name.isEmpty()) { puzzle.name = puzzleName.substring(0, puzzleName.length() - ".rh".length()); }
 		loadPuzzle(puzzle);
 	}
 
