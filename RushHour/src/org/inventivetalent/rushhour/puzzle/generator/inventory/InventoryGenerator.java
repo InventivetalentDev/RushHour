@@ -207,6 +207,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 			@Override
 			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
 				if (!player.getUniqueId().equals(InventoryGenerator.this.puzzle.player.getUniqueId())) { throw new IllegalStateException(); }
+				if (finished || puzzle.isSolving) { return; }
 				listener.onInteract(player, clickType);
 			}
 		});
