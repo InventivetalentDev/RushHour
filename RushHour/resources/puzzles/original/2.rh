@@ -67,5 +67,15 @@
       "variant": "T_PINK",
       "rotation": "VERTICAL"
     }
+  ],
+  "solution": [
+    "EL1",
+    "PD2",
+    "XR1",
+    "AD1",
+    "OL3",
+    "CU2",
+    "BU1",
+    "XR5"
   ]
 }
