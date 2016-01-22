@@ -75,18 +75,19 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	public void setCar(int x, int y, GameCar car, Direction moveDirection, final CarInteractListener listener) {
 		String displayName = " ";
 		if (moveDirection != null) {
+			boolean canMove = puzzle.checkCollision(car, car.bounds.shift(moveDirection));
 			switch (moveDirection) {
 				case LEFT:
-					displayName = " §7< ";
+					if (canMove) { displayName = " §e< "; } else { displayName = " §7< "; }
 					break;
 				case RIGHT:
-					displayName = " §7> ";
+					if (canMove) { displayName = " §e> "; } else { displayName = " §7> "; }
 					break;
 				case UP:
-					displayName = " §7^ ";
+					if (canMove) { displayName = " §e^ "; } else { displayName = " §7^ "; }
 					break;
 				case DOWN:
-					displayName = " §7v ";
+					if (canMove) { displayName = " §ev "; } else { displayName = " §7v "; }
 					break;
 			}
 		}
@@ -94,7 +95,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		setCar(x, y, car.variant.getColor(), displayName, new ItemListener() {
 			@Override
 			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
-				if (player.getUniqueId().equals(InventoryGenerator.this.puzzle.player.getUniqueId())) { throw new IllegalStateException(); }
+				if (!player.getUniqueId().equals(InventoryGenerator.this.puzzle.player.getUniqueId())) { throw new IllegalStateException(); }
 				listener.onInteract(player, clickType);
 			}
 		});
