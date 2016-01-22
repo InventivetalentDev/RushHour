@@ -39,7 +39,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 			52 };
 
 	public  InventoryMenuBuilder menuBuilder;
-	private Puzzle               puzzle;
+	public Puzzle               puzzle;
 
 	public InventoryGenerator() {
 		this.menuBuilder = new InventoryMenuBuilder(6 * 9, "RushHour"/*TODO: Title*/);
