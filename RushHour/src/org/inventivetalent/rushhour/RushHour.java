@@ -29,6 +29,7 @@
 package org.inventivetalent.rushhour;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -50,11 +51,15 @@ public class RushHour extends JavaPlugin {
 	File puzzleFolder = new File(getDataFolder(), "puzzles");
 	File messagesFile = new File(getDataFolder(), "messages.yml");
 
+	public static Material CAR_MATERIAL = Material.STAINED_CLAY;
+
 	public static MessageContainer messageContainer;
 
 	@Override
 	public void onEnable() {
 		saveDefaultConfig();
+
+		CAR_MATERIAL = Material.valueOf(getConfig().getString("puzzle.inventory.car.material"));
 
 		if (!puzzleFolder.exists()) {
 			//Save the included puzzles

@@ -1,0 +1,4 @@
+puzzle:
+  inventory:
+    car:
+      material: "STAINED_CLAY"

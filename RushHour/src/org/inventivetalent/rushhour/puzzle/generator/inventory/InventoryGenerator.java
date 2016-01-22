@@ -247,7 +247,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 		int index = x + (y * 9);
 		this.menuBuilder.withItem(index,//
-				new ItemBuilder(Material.STAINED_CLAY, 1, color.getData()).buildMeta().withDisplayName(displayName).item().build(), listener, InventoryMenuBuilder.ALL_CLICK_TYPES);
+				new ItemBuilder(RushHour.CAR_MATERIAL, 1, color.getData()).buildMeta().withDisplayName(displayName).item().build(), listener, InventoryMenuBuilder.ALL_CLICK_TYPES);
 	}
 
 	@Override
