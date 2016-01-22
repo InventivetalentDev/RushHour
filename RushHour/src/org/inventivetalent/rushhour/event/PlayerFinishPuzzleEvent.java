@@ -11,8 +11,6 @@ public class PlayerFinishPuzzleEvent extends RushHourEvent {
 	private boolean solved;
 	private boolean usedSolution;
 
-	private boolean cancelled;
-
 	public PlayerFinishPuzzleEvent(Player player, Puzzle puzzle, int moves, boolean solved, boolean usedSolution) {
 		this.player = player;
 		this.puzzle = puzzle;
