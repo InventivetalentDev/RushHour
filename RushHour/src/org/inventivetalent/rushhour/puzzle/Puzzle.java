@@ -44,6 +44,9 @@ public class Puzzle {
 	//Solution the player used
 	public Solution playerSolution = new Solution();
 
+	//If the puzzle is currently being solved by the solution
+	public boolean isSolving = false;
+
 	public Player player;
 
 	public AbstractPuzzleGenerator generator;

@@ -26,6 +26,7 @@ public class Solution {
 	}
 
 	public void solve(final Puzzle puzzle, long interval) {
+		puzzle.isSolving = true;
 		new BukkitRunnable() {
 			final List<Move> moveList = new ArrayList<>(moves);
 			int currentMove = 0;
