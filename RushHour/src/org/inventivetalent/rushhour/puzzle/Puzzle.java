@@ -38,7 +38,11 @@ public class Puzzle {
 	public String     name;
 	public Difficulty difficulty;
 	public Set<GameCar> cars = new HashSet<>();
+
+	//The pre-defined puzzle solution
 	public Solution solution;
+	//Solution the player used
+	public Solution playerSolution = new Solution();
 
 	public AbstractPuzzleGenerator generator;
 
@@ -72,7 +76,6 @@ public class Puzzle {
 
 				if ((x < 0 || y < 0) || (x > 5 || y > 5)) {
 					//Exception for the exit
-					System.out.println(x + " - " + y);
 					if ((x != 6 && x != 7) || y != 2) { continue; }
 				}
 
@@ -117,6 +120,8 @@ public class Puzzle {
 		//		car.currentY = car.currentY + direction.getShiftY();
 
 		System.out.println("Car " + car + " moved " + direction + " (from " + prevBounds.x() + "|" + prevBounds.y() + " to " + target.x() + "|" + target.y() + " )");
+
+		solution.trackPlayerMove(null, car.variant, direction, 1);
 
 		if (FINISH_BOUNDS.collidesWith(target)) {
 			if (car.variant == Variant.MAIN) {
