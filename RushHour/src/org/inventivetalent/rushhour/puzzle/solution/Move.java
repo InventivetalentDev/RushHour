@@ -36,6 +36,10 @@ public class Move {
 		return new Move(identifier, direction, moves);
 	}
 
+	public String asString() {
+		return new StringBuilder().append(this.variant.getIdentifier()).append(this.direction.getCode()).append(this.moves).toString();
+	}
+
 	public void executeMove(Puzzle puzzle) {
 		GameCar targetCar = null;
 		for (GameCar car : puzzle.cars) {
@@ -47,4 +51,31 @@ public class Move {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Move[ " + asString() + " ]";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) { return true; }
+		if (o == null || getClass() != o.getClass()) { return false; }
+
+		Move move = (Move) o;
+
+		if (moves != move.moves) { return false; }
+		if (timestamp != move.timestamp) { return false; }
+		if (variant != move.variant) { return false; }
+		return direction == move.direction;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = variant != null ? variant.hashCode() : 0;
+		result = 31 * result + (direction != null ? direction.hashCode() : 0);
+		result = 31 * result + moves;
+		result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
+		return result;
+	}
 }
