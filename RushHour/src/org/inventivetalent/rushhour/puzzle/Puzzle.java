@@ -49,6 +49,8 @@ public class Puzzle {
 	//If the puzzle is currently being solved by the solution
 	public boolean isSolving = false;
 
+	public boolean isFinished = false;
+
 	public Player player;
 
 	public AbstractPuzzleGenerator generator;
@@ -131,13 +133,9 @@ public class Puzzle {
 		if (FINISH_BOUNDS.collidesWith(target)) {
 			if (car.variant == Variant.MAIN) {
 				System.out.println("Puzzle finished!!!");
-				//TODO
-				this.generator.gameFinished(this.isSolving);
-
-				PlayerFinishPuzzleEvent event = new PlayerFinishPuzzleEvent(this.player, this, this.playerSolution.moves.size(), true, this.isSolving);
-				Bukkit.getPluginManager().callEvent(event);
+				puzzleFinished(true);
 			} else {
-				throw new IllegalStateException("Car manged to reach finish position but it's not the MAIN variant!");
+				throw new IllegalStateException("Car managed to reach finish position but it's not the MAIN variant!");
 			}
 		}
 
@@ -164,6 +162,26 @@ public class Puzzle {
 		}
 
 		return true;
+	}
+
+	public void puzzleFinished(boolean solved) {
+		if (!isFinished) {
+			PlayerFinishPuzzleEvent event = new PlayerFinishPuzzleEvent(this.player, this, this.playerSolution.moves.size(), solved, this.isSolving);
+			Bukkit.getPluginManager().callEvent(event);
+		}
+
+		if (isFinished || !solved/*!solved means the inventory was closed*/) {
+			this.player.removeMetadata("RUSHHOUR_GENERATOR", Bukkit.getPluginManager().getPlugin("RushHour"));
+			this.player.removeMetadata("RUSHHOUR_PUZZLE", Bukkit.getPluginManager().getPlugin("RushHour"));
+
+			this.generator.resetListeners();
+		} else {
+			System.out.println("!isFinished || solved");
+		}
+
+		this.generator.gameFinished(solved, this.isSolving);
+
+		isFinished = true;
 	}
 
 	public void toJson(Writer writer) {
