@@ -175,6 +175,8 @@ public class Puzzle {
 			this.player.removeMetadata("RUSHHOUR_PUZZLE", Bukkit.getPluginManager().getPlugin("RushHour"));
 
 			this.generator.resetListeners();
+
+			Runtime.getRuntime().gc();
 		} else {
 			System.out.println("!isFinished || solved");
 		}
