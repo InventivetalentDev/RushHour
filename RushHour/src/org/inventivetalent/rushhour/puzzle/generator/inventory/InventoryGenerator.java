@@ -125,6 +125,11 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		menuBuilder.refreshContent();
 	}
 
+	@Override
+	public void updateMoves(int moves) {
+		this.menuBuilder.withTitle("RushHour | Moves: " + moves);//TODO: Title
+	}
+
 	public void showTo(Player player) {
 		this.puzzle.player = player;
 		this.menuBuilder.show(player);

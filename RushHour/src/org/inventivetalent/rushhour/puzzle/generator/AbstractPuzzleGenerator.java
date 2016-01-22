@@ -31,4 +31,7 @@ public abstract class AbstractPuzzleGenerator {
 	public void updateCars() {
 	}
 
+	public void updateMoves(int moves) {
+	}
+
 }
