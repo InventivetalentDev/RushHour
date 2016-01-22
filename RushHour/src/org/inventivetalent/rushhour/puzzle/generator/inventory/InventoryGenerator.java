@@ -83,7 +83,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		MetaBuilder infoMetaBuilder = infoBuilder.buildMeta().withDisplayName("§7Moves: §e" + this.moveCount);
 		if (this.finished) {
 			double s = this.puzzle.playerSolution.getDuration() / 1000.0D;
-			infoMetaBuilder.withLore(new String[] { "§7You finished this puzzle in §e" + String.format("%d:%02d:%02d", (int) (s / 3600), (int) ((s % 3600) / 60), (int) (s % 60)) + "s§7!" });
+			infoMetaBuilder.withLore(new String[] { "§7You finished this puzzle in §e" + String.format("%d:%02d:%02d", (int) (s / 3600), (int) ((s % 3600) / 60), (int) (s % 60)) + "§7!" });
 		}
 		infoBuilder = infoMetaBuilder.item();
 		this.menuBuilder.withItem(53, infoBuilder.build(), new ItemListener() {
