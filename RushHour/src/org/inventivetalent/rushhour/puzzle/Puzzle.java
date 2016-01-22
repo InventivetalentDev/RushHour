@@ -7,8 +7,9 @@ import org.bukkit.event.inventory.ClickType;
 import org.inventivetalent.rushhour.car.Car;
 import org.inventivetalent.rushhour.car.Rotation;
 import org.inventivetalent.rushhour.car.Variant;
-import org.inventivetalent.rushhour.puzzle.generator.CarInteractListener;
 import org.inventivetalent.rushhour.puzzle.generator.AbstractPuzzleGenerator;
+import org.inventivetalent.rushhour.puzzle.generator.CarInteractListener;
+import org.inventivetalent.rushhour.puzzle.solution.Solution;
 
 import java.io.Reader;
 import java.io.Writer;
@@ -17,7 +18,7 @@ import java.util.Set;
 
 public class Puzzle {
 
-	public static final Gson GSON = new GsonBuilder().setPrettyPrinting()/*.excludeFieldsWithModifiers(Modifier.TRANSIENT)*/.create();
+	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Solution.class, new Solution.Serializer()).create();
 
 	public static final Bounds[] WALL_BOUNDS   = new Bounds[] {
 	/*Left wall*/
