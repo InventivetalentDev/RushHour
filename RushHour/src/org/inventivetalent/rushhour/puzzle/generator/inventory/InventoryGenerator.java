@@ -35,7 +35,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 			/* Right border */
 			7,
-			8,
+			/*8,*/
 			16,
 			17,
 			/* 25 <- Exit hole */
@@ -67,6 +67,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 			}
 		}
 
+		//Walls
 		for (int i : WALL_SLOTS) {
 			this.menuBuilder.withItem(i,//
 					new ItemBuilder(Material.STAINED_GLASS_PANE, 1, finished ? DyeColor.GREEN.getData() : DyeColor.GRAY.getData()).buildMeta().withDisplayName(finished ? " §aGame Finished " : " ").item().build(), new ItemListener() {
@@ -76,9 +77,19 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 					}, InventoryMenuBuilder.ALL_CLICK_TYPES);
 		}
 
+		//Moves information
 		this.menuBuilder.withItem(53, new ItemBuilder(Material.WATCH, this.moveCount).buildMeta().withDisplayName("§7Moves: §e" + this.moveCount).item().build(), new ItemListener() {
 			@Override
 			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
+			}
+		}, InventoryMenuBuilder.ALL_CLICK_TYPES);
+
+		//Help item
+		//TODO: Check permission before adding
+		this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, this.moveCount).buildMeta().withDisplayName("§aShow solution").item().build(), new ItemListener() {
+			@Override
+			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
+				//TODO: Check permission
 			}
 		}, InventoryMenuBuilder.ALL_CLICK_TYPES);
 
