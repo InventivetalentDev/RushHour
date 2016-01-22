@@ -18,4 +18,9 @@ public enum Difficulty {
 	public ChatColor getColor() {
 		return color;
 	}
+
+	@Override
+	public String toString() {
+		return getColor() + name();
+	}
 }
