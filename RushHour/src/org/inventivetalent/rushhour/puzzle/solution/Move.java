@@ -51,6 +51,15 @@ public class Move {
 		}
 	}
 
+	public void executeSingleMove(Puzzle puzzle) {
+		GameCar targetCar = null;
+		for (GameCar car : puzzle.cars) {
+			if (car.variant == this.variant) { targetCar = car; }
+		}
+		if (targetCar == null) { throw new IllegalStateException("The puzzle does not contain the car of this move"); }
+		puzzle.moveCar(targetCar, this.direction);
+	}
+
 	@Override
 	public String toString() {
 		return "Move[ " + asString() + " ]";
