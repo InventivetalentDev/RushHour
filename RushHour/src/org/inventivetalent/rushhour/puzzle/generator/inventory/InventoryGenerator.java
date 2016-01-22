@@ -160,6 +160,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		generateBase();
 	}
 
+	@Override
 	public void showTo(Player player) {
 		this.puzzle.player = player;
 		this.menuBuilder.show(player);

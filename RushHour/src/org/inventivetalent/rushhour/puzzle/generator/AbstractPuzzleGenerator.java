@@ -1,5 +1,6 @@
 package org.inventivetalent.rushhour.puzzle.generator;
 
+import org.bukkit.entity.Player;
 import org.inventivetalent.rushhour.puzzle.Direction;
 import org.inventivetalent.rushhour.puzzle.GameCar;
 import org.inventivetalent.rushhour.puzzle.Puzzle;
@@ -35,6 +36,9 @@ public abstract class AbstractPuzzleGenerator {
 	}
 
 	public void gameFinished(boolean wasSolution) {
+	}
+
+	public void showTo(Player player) {
 	}
 
 }
