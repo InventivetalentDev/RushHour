@@ -45,6 +45,14 @@ public class Solution {
 		}.runTaskTimer(Bukkit.getPluginManager().getPlugin("RushHour"), interval, interval);
 	}
 
+	public JsonArray toJsonArray() {
+		JsonArray array = new JsonArray();
+		for (Move move : this.moves) {
+			array.add(new JsonPrimitive(move.asString()));
+		}
+		return array;
+	}
+
 	public static class Serializer implements JsonDeserializer<Solution> {
 
 		@Override
