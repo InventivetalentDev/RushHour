@@ -80,7 +80,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	public InventoryMenuBuilder menuBuilder;
 	public Puzzle               puzzle;
 
-	public int moveCount         = 0;
+	public int moveCount = 0;
 	public int combinedMoveCount = 0;
 
 	public boolean finished = false;
@@ -141,15 +141,22 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 			this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, 1).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.solution.show")).item().build(), new ItemListener() {
 				@Override
 				public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
-					if (finished || puzzle.isSolving) { return; }
+					if (finished || puzzle.isSolving) {
+						player.playSound(player.getEyeLocation(), Sound.NOTE_STICKS, 1.0f, 0.5f);
+						return;
+					}
 					if (!puzzle.player.hasPermission("rushhour.solution." + puzzle.getLevelPerm())) {
+						player.playSound(player.getEyeLocation(), Sound.NOTE_STICKS, 1.0f, 0.5f);
 						player.sendMessage(RushHour.messageContainer.getMessage("solution.error.permission.level"));
 						return;
 					}
 					if (puzzle.solution == null) {
+						player.playSound(player.getEyeLocation(), Sound.NOTE_STICKS, 1.0f, 0.5f);
 						player.sendMessage(RushHour.messageContainer.getMessage("solution.error.missing"));
 						return;
 					}
+
+					player.playSound(player.getEyeLocation(), Sound.NOTE_STICKS, 1.0f, 1.0f);
 
 					player.sendMessage(RushHour.messageContainer.getMessage("solution.info.solving"));
 					puzzle.solution.solve(puzzle, 10);
