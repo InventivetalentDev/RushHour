@@ -187,7 +187,7 @@ public class Puzzle {
 	}
 
 	public String getLevelPerm() {
-		return this.name.replace("/", ".");
+		return this.name.replace("/", ".").replace("\\", ".");
 	}
 
 	public void toJson(Writer writer) {
