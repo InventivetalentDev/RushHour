@@ -3,8 +3,11 @@ package org.inventivetalent.rushhour;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.inventivetalent.messagebuilder.MessageBuilder;
+import org.inventivetalent.messagebuilder.MessageContainer;
 import org.inventivetalent.rushhour.listener.InventoryListener;
 import org.inventivetalent.rushhour.puzzle.generator.inventory.InventoryGenerator;
 
@@ -17,14 +20,15 @@ import java.util.jar.JarFile;
 public class RushHour extends JavaPlugin {
 
 	File puzzleFolder = new File(getDataFolder(), "puzzles");
+	File messagesFile = new File(getDataFolder(), "messages.yml");
+
+	public MessageContainer messageContainer;
 
 	@Override
 	public void onEnable() {
 		saveDefaultConfig();
 
 		if (!puzzleFolder.exists()) {
-			//			puzzleFolder.mkdirs();
-
 			//Save the included puzzles
 			try {
 				copyResource("puzzles");
@@ -32,29 +36,95 @@ public class RushHour extends JavaPlugin {
 				e.printStackTrace();
 			}
 		}
+		if (!messagesFile.exists()) {
+			saveResource("messages.yml", false);
+		}
+
+		this.messageContainer = new MessageBuilder()//
+				.withMessage("command.play.help", "&aPlay a specific level")//
+				.withMessage("command.play.info.loading", "&aLoading level %s...")//
+				.withMessage("command.play.error.level.missing", "&cPlease specify the level name")//
+				.withMessage("command.play.error.level.notFound", "&cLevel could not be found")//
+				.withMessage("command.play.error.noPlayer", "&cYou must be a player to play")//
+				.withMessage("command.play.error.permission.command", "&cYou are not permitted to use this command")//
+				.withMessage("command.play.error.permission.level", "&cYou are not permitted to play this level")//
+
+				.fromConfig(YamlConfiguration.loadConfiguration(messagesFile)).build();
 
 		Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		final InventoryGenerator generator = new InventoryGenerator();
-		generator.generateBase();
-		try {
-			generator.loadPuzzle(new File(puzzleFolder, "original/2.rh"));
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (args.length == 0) {
+			if (sender.hasPermission("rushhour.play")) {
+				sender.sendMessage("  ");
+				sender.sendMessage(this.messageContainer.getMessage("command.play.help"));
+				sender.sendMessage("§e/rushhour play <level name>");
+			}
+			if (sender.hasPermission("rushhour.spectate")) {
+				sender.sendMessage("  ");
+				sender.sendMessage("§aSpectate a player");
+				sender.sendMessage("§e/rushhour spectate <player>");
+			}
+
+			return true;
 		}
 
-		Bukkit.getScheduler().runTaskLater(this, new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("Solving puzzle...");
-				//				generator.puzzle.solution.solve(generator.puzzle, 10);
+		if ("play".equalsIgnoreCase(args[0])) {
+			if (!(sender instanceof Player)) {
+				sender.sendMessage(messageContainer.getMessage("command.play.error.noPlayer"));
+				return false;
 			}
-		}, 80);
+			Player player = (Player) sender;
 
-		generator.showTo((Player) sender);
+			if (!player.hasPermission("rushhour.play")) {
+				sender.sendMessage(messageContainer.getMessage("command.play.error.permission.command"));
+				return false;
+			}
+
+			if (args.length == 1) {
+				sender.sendMessage(messageContainer.getMessage("command.play.error.level.missing"));
+				return false;
+			}
+			//Level name (first with optional extension)
+			String level = args[1];
+			//Level name without extension
+			String levelName = level;
+			if (level.endsWith(".rh")) {
+				levelName = level.substring(0, level.length() - ".rh".length());
+			} else {
+				levelName = level;
+				level = level + ".rh";
+			}
+
+			sender.sendMessage(messageContainer.getMessage("command.play.info.loading", level));
+
+			File levelFile = new File(puzzleFolder, level);
+			if (!levelFile.exists()) {
+				sender.sendMessage(messageContainer.getMessage("command.play.error.level.notFound"));
+				return false;
+			}
+
+			if (!player.hasPermission("rushhour.play." + levelName.replace("/", "."))) {
+				sender.sendMessage(messageContainer.getMessage("command.play.error.permission.level"));
+				return false;
+			}
+
+			InventoryGenerator generator = new InventoryGenerator();
+			generator.generateBase();
+			try {
+				generator.loadPuzzle(levelFile);
+			} catch (IOException e) {
+				sender.sendMessage("§cError while loading level");
+				e.printStackTrace();
+				return false;
+			}
+
+			generator.showTo(player);
+			return true;
+		}
+
 		return false;
 	}
 

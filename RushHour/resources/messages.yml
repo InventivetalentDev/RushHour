@@ -1,0 +1,13 @@
+command:
+  play:
+    help: "&aPlay a specific level"
+    info:
+      loading: "&eLoading level %s..."
+    error:
+      level:
+        missing: "&cPlease specify the level name"
+        notFound: "&cLevel could not be found"
+      noPlayer: "&cYou must be a player to play"
+      permission:
+        command: "&cYou are not permitted to use this command"
+        level: "&cYou are not permitted to play this level"
