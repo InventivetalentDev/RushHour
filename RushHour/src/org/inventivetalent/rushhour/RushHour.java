@@ -49,12 +49,14 @@ public class RushHour extends JavaPlugin {
 				.withMessage("command.play.error.permission.command", "&cYou are not permitted to use this command")//
 				.withMessage("command.play.error.permission.level", "&cYou are not permitted to play this level")//
 
-				.withMessage("inventory.title", "&c&lRush&e&lHour  &8\"%s\"&r  %s")//
+				.withMessage("inventory.title", "&c&lRush&e&lHour")//
 				.withMessage("inventory.game.finished.inner", " &2Game Finished! ")//
 				.withMessage("inventory.game.finished.outer", " &aGame Finished! ")//
 				.withMessage("inventory.game.finished.time", "&7You finished this puzzle in &e%d:%02d:%02d&7!")//
 				.withMessage("inventory.game.solution.show", "&aShow solution")//
 				.withMessage("inventory.game.moves", "&7Moves: &e%s")//
+				.withMessage("inventory.game.level.name", "&7Level: &e%s")//
+				.withMessage("inventory.game.level.difficulty", "&7Difficulty: %s")//
 				.withMessage("inventory.game.move.disabled.left", " &7< ")//
 				.withMessage("inventory.game.move.disabled.right", " &7> ")//
 				.withMessage("inventory.game.move.disabled.up", " &7^ ")//

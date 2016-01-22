@@ -13,7 +13,7 @@ command:
         level: "&cYou are not permitted to play this level"
 
 inventory:
-  title: "&c&lRush&e&lHour  &8\"%s\"&r  %s"
+  title: "&c&lRush&e&lHour"
   game:
     finished:
       inner: " &2Game Finished! "
@@ -22,6 +22,9 @@ inventory:
     solution:
       show: "&aShow solution"
     moves: "&7Moves: &e%s"
+    level:
+      name: "&7Level: &e%s"
+      difficulty: "&7Difficulty: %s"
     move:
       disabled:
         left: " &7< "
