@@ -130,7 +130,7 @@ public class Puzzle {
 			if (car.variant == Variant.MAIN) {
 				System.out.println("Puzzle finished!!!");
 				//TODO
-				this.generator.gameFinished();
+				this.generator.gameFinished(this.isSolving);
 			} else {
 				throw new IllegalStateException("Car manged to reach finish position but it's not the MAIN variant!");
 			}

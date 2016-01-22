@@ -144,7 +144,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	}
 
 	@Override
-	public void gameFinished() {
+	public void gameFinished(boolean wasSolution) {
 		this.finished = true;
 
 		resetListeners();

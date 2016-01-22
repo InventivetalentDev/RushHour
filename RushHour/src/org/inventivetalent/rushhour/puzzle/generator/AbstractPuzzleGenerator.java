@@ -34,7 +34,7 @@ public abstract class AbstractPuzzleGenerator {
 	public void updateMoves(int moves) {
 	}
 
-	public void gameFinished() {
+	public void gameFinished(boolean wasSolution) {
 	}
 
 }
