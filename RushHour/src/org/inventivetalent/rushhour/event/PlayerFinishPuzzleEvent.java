@@ -70,6 +70,13 @@ public class PlayerFinishPuzzleEvent extends RushHourEvent {
 	}
 
 	/**
+	 * @return The "combined" solution the player found (after calling {@link Solution#combineMoves()} on the solution)
+	 */
+	public Solution getCombinedPlayerSolution() {
+		return getPlayerSolution().combineMoves();
+	}
+
+	/**
 	 * @return The solution which is pre-defined for this puzzle
 	 */
 	public Solution getPuzzleSolution() {
