@@ -61,10 +61,8 @@ public class Puzzle {
 		this.generator = generator;
 
 		//Clear all old listeners
-		//		MenuBuilderPlugin.instance.inventoryListener.unregisterAllListeners(generator.menuBuilder.getInventory());
 		generator.resetListeners();
 		//Remove all old items
-		//		generator.menuBuilder.getInventory().clear();
 		generator.clearCars();
 
 		generator.generateBase();
@@ -129,6 +127,7 @@ public class Puzzle {
 			if (car.variant == Variant.MAIN) {
 				System.out.println("Puzzle finished!!!");
 				//TODO
+				this.generator.gameFinished();
 			} else {
 				throw new IllegalStateException("Car manged to reach finish position but it's not the MAIN variant!");
 			}
