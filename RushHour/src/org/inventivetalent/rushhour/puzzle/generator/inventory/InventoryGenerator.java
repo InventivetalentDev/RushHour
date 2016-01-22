@@ -31,6 +31,7 @@ package org.inventivetalent.rushhour.puzzle.generator.inventory;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -279,6 +280,11 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 		generateBase();
 
+		if (solved) {
+			puzzle.player.playSound(puzzle.player.getEyeLocation(), Sound.NOTE_PLING, 1.0f, 2.0f);
+			puzzle.player.playSound(puzzle.player.getEyeLocation(), Sound.CLICK, 1.0f, 1.0f);
+			puzzle.player.playSound(puzzle.player.getEyeLocation(), Sound.LEVEL_UP, 0.8f, 1.5f);
+		}
 	}
 
 	@Override

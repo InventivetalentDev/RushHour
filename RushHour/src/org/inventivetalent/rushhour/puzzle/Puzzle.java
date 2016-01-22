@@ -31,6 +31,7 @@ package org.inventivetalent.rushhour.puzzle;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.inventivetalent.rushhour.car.Car;
@@ -149,9 +150,14 @@ public class Puzzle {
 		Bounds prevBounds = car.bounds;
 		Bounds target = car.bounds.shift(direction);
 		if (!checkCollision(car, target)) {
+			player.playSound(player.getEyeLocation(), Sound.NOTE_BASS, 0.8f, 0.8f);
+			player.playSound(player.getEyeLocation(), Sound.NOTE_BASS_DRUM, 0.5f, 0.7f);
 			return;
 		}
 		car.bounds = target;
+
+		player.playSound(player.getEyeLocation(), Sound.NOTE_STICKS, 1.0f, 0.8f);
+		player.playSound(player.getEyeLocation(), Sound.PISTON_EXTEND, 0.05f, 0.7f);
 
 		System.out.println("Car " + car + " moved " + direction + " (from " + prevBounds.x() + "|" + prevBounds.y() + " to " + target.x() + "|" + target.y() + " )");
 
