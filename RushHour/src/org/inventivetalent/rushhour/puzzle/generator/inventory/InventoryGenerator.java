@@ -120,7 +120,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		puzzle.initializeCars();
 		puzzle.addCarsToInventory(this);
 
-		this.menuBuilder.withTitle("§c§lRush§e§lHour  §7\"" + this.puzzle.name + "\"  " + this.puzzle.difficulty);
+		this.menuBuilder.withTitle("§c§lRush§e§lHour  §8\"" + this.puzzle.name + "\"§r  " + this.puzzle.difficulty);
 	}
 
 	public void loadPuzzle(File file) throws IOException {
