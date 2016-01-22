@@ -53,7 +53,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	public boolean finished  = false;
 
 	public InventoryGenerator() {
-		this.menuBuilder = new InventoryMenuBuilder(6 * 9, "RushHour"/*TODO: Title*/);
+		this.menuBuilder = new InventoryMenuBuilder(6 * 9, "§c§lRush§e§lHour");
 	}
 
 	public void generateBase() {
@@ -143,7 +143,6 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	@Override
 	public void updateMoves(int moves) {
 		this.moveCount = moves;
-		//		this.menuBuilder.withTitle("RushHour | Moves: " + moves);//TODO: Title
 	}
 
 	@Override
