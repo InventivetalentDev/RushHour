@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.inventivetalent.rushhour.listener.InventoryListener;
 import org.inventivetalent.rushhour.puzzle.generator.inventory.InventoryGenerator;
 
 import java.io.File;
@@ -31,6 +32,8 @@ public class RushHour extends JavaPlugin {
 				e.printStackTrace();
 			}
 		}
+
+		Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
 	}
 
 	@Override
@@ -47,7 +50,7 @@ public class RushHour extends JavaPlugin {
 			@Override
 			public void run() {
 				System.out.println("Solving puzzle...");
-				generator.puzzle.solution.solve(generator.puzzle, 10);
+				//				generator.puzzle.solution.solve(generator.puzzle, 10);
 			}
 		}, 80);
 
