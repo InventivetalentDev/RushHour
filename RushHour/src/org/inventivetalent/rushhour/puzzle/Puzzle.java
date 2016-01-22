@@ -2,11 +2,13 @@ package org.inventivetalent.rushhour.puzzle;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.inventivetalent.rushhour.car.Car;
 import org.inventivetalent.rushhour.car.Rotation;
 import org.inventivetalent.rushhour.car.Variant;
+import org.inventivetalent.rushhour.event.PlayerFinishPuzzleEvent;
 import org.inventivetalent.rushhour.puzzle.generator.AbstractPuzzleGenerator;
 import org.inventivetalent.rushhour.puzzle.generator.CarInteractListener;
 import org.inventivetalent.rushhour.puzzle.solution.Solution;
@@ -131,6 +133,9 @@ public class Puzzle {
 				System.out.println("Puzzle finished!!!");
 				//TODO
 				this.generator.gameFinished(this.isSolving);
+
+				PlayerFinishPuzzleEvent event = new PlayerFinishPuzzleEvent(this.player, this, this.playerSolution.moves.size(), true, this.isSolving);
+				Bukkit.getPluginManager().callEvent(event);
 			} else {
 				throw new IllegalStateException("Car manged to reach finish position but it's not the MAIN variant!");
 			}
