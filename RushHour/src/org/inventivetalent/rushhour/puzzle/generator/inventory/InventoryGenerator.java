@@ -8,6 +8,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.inventivetalent.itembuilder.ItemBuilder;
+import org.inventivetalent.itembuilder.MetaBuilder;
 import org.inventivetalent.menubuilder.MenuBuilderPlugin;
 import org.inventivetalent.menubuilder.inventory.InventoryMenuBuilder;
 import org.inventivetalent.menubuilder.inventory.ItemListener;
@@ -78,7 +79,14 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		}
 
 		//Moves information
-		this.menuBuilder.withItem(53, new ItemBuilder(Material.WATCH, this.moveCount).buildMeta().withDisplayName("§7Moves: §e" + this.moveCount).item().build(), new ItemListener() {
+		ItemBuilder infoBuilder = new ItemBuilder(Material.WATCH, this.moveCount);
+		MetaBuilder infoMetaBuilder = infoBuilder.buildMeta().withDisplayName("§7Moves: §e" + this.moveCount);
+		if (this.finished) {
+			double s = this.puzzle.playerSolution.getDuration() / 1000.0D;
+			infoMetaBuilder.withLore(new String[] { "§7You finished this puzzle in §e" + String.format("%d:%02d:%02d", (int) (s / 3600), (int) ((s % 3600) / 60), (int) (s % 60)) + "s§7!" });
+		}
+		infoBuilder = infoMetaBuilder.item();
+		this.menuBuilder.withItem(53, infoBuilder.build(), new ItemListener() {
 			@Override
 			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
 			}
