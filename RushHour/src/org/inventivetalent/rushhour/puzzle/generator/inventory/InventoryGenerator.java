@@ -91,9 +91,6 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 			}
 		}
 
-		//TODO: remove
-		displayName = car.bounds.x() + "|" + car.bounds.y() + " - " + (int) car.bounds.getMaxX() + "|" + (int) car.bounds.getMaxY();
-
 		setCar(x, y, car.variant.getColor(), displayName, new ItemListener() {
 			@Override
 			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {

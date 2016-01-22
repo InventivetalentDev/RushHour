@@ -47,7 +47,7 @@ public class RushHour extends JavaPlugin {
 			@Override
 			public void run() {
 				System.out.println("Solving puzzle...");
-				generator.puzzle.solution.solve(generator.puzzle, 20);
+				generator.puzzle.solution.solve(generator.puzzle, 10);
 			}
 		}, 80);
 
