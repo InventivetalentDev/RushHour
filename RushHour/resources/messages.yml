@@ -18,7 +18,7 @@ inventory:
     finished:
       inner: " &2Game Finished! "
       outer: " &aGame Finished! "
-      time: "&7You finished this puzzle in &e%d:%02d:%02d&7!"
+      time: "&7You finished this puzzle in &e%d:%02d:%02d.%d&7!"
     solution:
       show: "&aShow solution"
     moves: "&7Moves: &e%s (%s)"
