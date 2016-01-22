@@ -27,6 +27,10 @@ public class Solution {
 
 	public void solve(final Puzzle puzzle, long interval) {
 		puzzle.isSolving = true;
+
+		//Reset the cars to their original positions
+		puzzle.initializeCars();
+
 		new BukkitRunnable() {
 			final List<Move> moveList = new ArrayList<>(moves);
 			int currentMove = 0;
