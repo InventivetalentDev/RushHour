@@ -46,6 +46,45 @@ public class Solution {
 		}.runTaskTimer(Bukkit.getPluginManager().getPlugin("RushHour"), interval, interval);
 	}
 
+	/**
+	 * Combines moves of the same car and returns the "new" Solution
+	 * (e.g. CL1, CL1, CL2 --> CL4)
+	 */
+	public Solution combineMoves() {
+		Solution solution = new Solution();
+
+		List<Move> moveList = new ArrayList<>(this.moves);
+		List<Move> newMoveList = new ArrayList<>();
+
+		Move lastMove = null;
+		for (Move move : moveList) {
+			if (lastMove == null) {
+				//First move, so just continue
+				lastMove = move;
+				continue;
+			}
+
+			if (move.variant == lastMove.variant) {
+				if (move.direction == lastMove.direction) {
+					//It's the same
+					//Update the last move by adding both move amounts together
+					lastMove = new Move(move.variant, move.direction, lastMove.moves + move.moves);
+					continue;
+				}
+			}
+
+			//The moves are not equal, so add the last move to the new list
+			newMoveList.add(lastMove);
+			//And set the lastMove to the current one
+			lastMove = move;
+		}
+		//Add the VERY last move to the list
+		if (lastMove != null) { newMoveList.add(lastMove); }
+
+		solution.moves.addAll(newMoveList);
+		return solution;
+	}
+
 	public JsonArray toJsonArray() {
 		JsonArray array = new JsonArray();
 		for (Move move : this.moves) {
