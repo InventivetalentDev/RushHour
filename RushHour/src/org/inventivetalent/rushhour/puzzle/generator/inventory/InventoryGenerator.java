@@ -112,6 +112,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 			this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, 1).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.solution.show")).item().build(), new ItemListener() {
 				@Override
 				public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
+					if (finished || puzzle.isSolving) { return; }
 					if (!puzzle.player.hasPermission("rushhour.solution." + puzzle.getLevelPerm())) {
 						player.sendMessage(RushHour.messageContainer.getMessage("solution.error.permission.level"));
 						return;
