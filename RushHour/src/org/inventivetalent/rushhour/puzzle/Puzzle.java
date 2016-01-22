@@ -35,7 +35,7 @@ public class Puzzle {
 			new Bounds(0, -1, Rotation.HORIZONTAL, 6),
 	/*Bottom wall*/
 			new Bounds(0, 6, Rotation.HORIZONTAL, 6) };
-	public static final Bounds   FINISH_BOUNDS = new Bounds(6, 2, Rotation.HORIZONTAL, 1);
+	public static final Bounds   FINISH_BOUNDS = new Bounds(7, 2, Rotation.HORIZONTAL, 1);
 
 	public String     name;
 	public Difficulty difficulty;
