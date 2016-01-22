@@ -39,6 +39,7 @@ import org.inventivetalent.messagebuilder.MessageBuilder;
 import org.inventivetalent.messagebuilder.MessageContainer;
 import org.inventivetalent.rushhour.listener.InventoryListener;
 import org.inventivetalent.rushhour.puzzle.generator.inventory.InventoryGenerator;
+import org.inventivetalent.rushhour.sign.SignListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,6 +54,8 @@ public class RushHour extends JavaPlugin {
 
 	public static Material CAR_MATERIAL = Material.STAINED_CLAY;
 
+	public static int SIGN_LEVEL_LINE = 1;
+
 	public static MessageContainer messageContainer;
 
 	@Override
@@ -60,6 +63,7 @@ public class RushHour extends JavaPlugin {
 		saveDefaultConfig();
 
 		CAR_MATERIAL = Material.valueOf(getConfig().getString("puzzle.inventory.car.material"));
+		SIGN_LEVEL_LINE = getConfig().getInt("sign.levelLine");
 
 		if (!puzzleFolder.exists()) {
 			//Save the included puzzles
@@ -103,9 +107,16 @@ public class RushHour extends JavaPlugin {
 				.withMessage("solution.error.missing", "&cSorry, I don't know how to solve this level")//
 				.withMessage("solution.info.solving", "&ePlaying solution...")//
 
+				.withMessage("sign.title", "&7[&c&lRush&eHour&7]")//
+				.withMessage("sign.created", "&aCreated sign for &e%s")//
+				.withMessage("sign.error.permission.create", "&cYou are not permitted to create signs")//
+				.withMessage("sign.error.permission.use", "&cYou are not permitted to use signs")//
+				.withMessage("sign.error.level.missing", "&cPlease specify the level of this sign")//
+
 				.fromConfig(YamlConfiguration.loadConfiguration(messagesFile)).build();
 
 		Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
+		Bukkit.getPluginManager().registerEvents(new SignListener(), this);
 	}
 
 	@Override

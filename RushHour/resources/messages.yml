@@ -44,3 +44,13 @@ solution:
     missing: "&cSorry, I don't know how to solve this level"
   info:
     solving: "&ePlaying solution..."
+
+sign:
+  title: "&7[&c&lRush&eHour&7]"
+  created: "&aCreated sign for &e%s"
+  error:
+    permission:
+      create: "&cYou are not permitted to create signs"
+      use: "&cYou are not permitted to use signs"
+    level:
+      missing: "&cPlease specify the level of this sign"
