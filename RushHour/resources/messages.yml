@@ -33,3 +33,11 @@ inventory:
         right: " &e> "
         up: " &e^ "
         down: " &ev "
+
+solution:
+  error:
+    permission:
+      level: "&cYou are not permitted to view the solution for this level"
+    missing: "&cSorry, I don't know how to solve this level"
+  info:
+    solving: "&ePlaying solution..."

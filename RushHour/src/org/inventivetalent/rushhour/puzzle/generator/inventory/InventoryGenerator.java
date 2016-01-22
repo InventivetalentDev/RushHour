@@ -94,13 +94,24 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		}, InventoryMenuBuilder.ALL_CLICK_TYPES);
 
 		//Help item
-		//TODO: Check permission before adding
-		this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, 1).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.solution.show")).item().build(), new ItemListener() {
-			@Override
-			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
-				//TODO: Check permission
-			}
-		}, InventoryMenuBuilder.ALL_CLICK_TYPES);
+		if (this.puzzle.player != null && this.puzzle.player.hasPermission("rushhour.solution." + this.puzzle.getLevelPerm())) {
+			this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, 1).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.solution.show")).item().build(), new ItemListener() {
+				@Override
+				public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
+					if (!puzzle.player.hasPermission("rushhour.solution." + puzzle.getLevelPerm())) {
+						player.sendMessage(RushHour.messageContainer.getMessage("solution.error.permission.level"));
+						return;
+					}
+					if (puzzle.solution == null) {
+						player.sendMessage(RushHour.messageContainer.getMessage("solution.error.missing"));
+						return;
+					}
+
+					player.sendMessage(RushHour.messageContainer.getMessage("solution.info.solving"));
+					puzzle.solution.solve(puzzle, 10);
+				}
+			}, InventoryMenuBuilder.ALL_CLICK_TYPES);
+		}
 
 		if (this.finished) {
 			int[] R_SLOTS = new int[] {
