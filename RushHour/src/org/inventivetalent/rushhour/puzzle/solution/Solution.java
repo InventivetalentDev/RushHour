@@ -53,7 +53,7 @@ public class Solution {
 		return array;
 	}
 
-	public static class Serializer implements JsonDeserializer<Solution> {
+	public static class Serializer implements JsonDeserializer<Solution>, JsonSerializer<Solution> {
 
 		@Override
 		public Solution deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
@@ -72,6 +72,11 @@ public class Solution {
 				}
 			}
 			return solution;
+		}
+
+		@Override
+		public JsonElement serialize(Solution solution, Type type, JsonSerializationContext jsonSerializationContext) {
+			return solution.toJsonArray();
 		}
 	}
 
