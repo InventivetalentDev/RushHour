@@ -72,7 +72,8 @@ public class Puzzle {
 
 				if ((x < 0 || y < 0) || (x > 5 || y > 5)) {
 					//Exception for the exit
-					if (x != 6 || y != 2) { continue; }
+					System.out.println(x + " - " + y);
+					if ((x != 6 && x != 7) || y != 2) { continue; }
 				}
 
 				Direction direction = null;
@@ -91,11 +92,11 @@ public class Puzzle {
 				}
 
 				final Direction finalDirection = direction;
-				generator.setCar(x, y, car.variant, direction, new CarInteractListener() {
+				generator.setCar(x, y, car, direction, new CarInteractListener() {
 					@Override
 					public void onInteract(Player player, ClickType clickType) {
 						if (finalDirection != null) {
-							moveCar(car, Direction.DOWN);
+							moveCar(car, finalDirection);
 						}
 					}
 				});
@@ -142,7 +143,8 @@ public class Puzzle {
 				continue;
 			}
 			if (car.bounds.collidesWith(targetBounds)) {
-				System.out.println("Car collision");
+				System.out.println("Car collision " + movingCar);
+				System.out.println("  With " + car);
 				return false;
 			}
 		}
