@@ -9,11 +9,11 @@ import org.inventivetalent.itembuilder.ItemBuilder;
 import org.inventivetalent.menubuilder.MenuBuilderPlugin;
 import org.inventivetalent.menubuilder.inventory.InventoryMenuBuilder;
 import org.inventivetalent.menubuilder.inventory.ItemListener;
-import org.inventivetalent.rushhour.car.Variant;
 import org.inventivetalent.rushhour.puzzle.Direction;
+import org.inventivetalent.rushhour.puzzle.GameCar;
 import org.inventivetalent.rushhour.puzzle.Puzzle;
-import org.inventivetalent.rushhour.puzzle.generator.CarInteractListener;
 import org.inventivetalent.rushhour.puzzle.generator.AbstractPuzzleGenerator;
+import org.inventivetalent.rushhour.puzzle.generator.CarInteractListener;
 
 import java.io.File;
 import java.io.FileReader;
@@ -32,13 +32,18 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 			/* Right border */
 			7,
+			8,
 			16,
+			17,
 			/* 25 <- Exit hole */
 			34,
+			35,
 			43,
-			52 };
+			44,
+			52,
+			53 };
 
-	public  InventoryMenuBuilder menuBuilder;
+	public InventoryMenuBuilder menuBuilder;
 	public Puzzle               puzzle;
 
 	public InventoryGenerator() {
@@ -67,7 +72,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	}
 
 	@Override
-	public void setCar(int x, int y, Variant variant, Direction moveDirection, final CarInteractListener listener) {
+	public void setCar(int x, int y, GameCar car, Direction moveDirection, final CarInteractListener listener) {
 		String displayName = " ";
 		if (moveDirection != null) {
 			switch (moveDirection) {
@@ -85,7 +90,11 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 					break;
 			}
 		}
-		setCar(x, y, variant.getColor(), displayName, new ItemListener() {
+
+		//TODO: remove
+		displayName = car.bounds.x() + "|" + car.bounds.y() + " - " + (int) car.bounds.getMaxX() + "|" + (int) car.bounds.getMaxY();
+
+		setCar(x, y, car.variant.getColor(), displayName, new ItemListener() {
 			@Override
 			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
 				listener.onInteract(player, clickType);
