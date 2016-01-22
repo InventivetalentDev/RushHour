@@ -166,7 +166,7 @@ public class Puzzle {
 
 	public void puzzleFinished(boolean solved) {
 		if (!isFinished) {
-			PlayerFinishPuzzleEvent event = new PlayerFinishPuzzleEvent(this.player, this, this.playerSolution.moves.size(), solved, this.isSolving);
+			PlayerFinishPuzzleEvent event = new PlayerFinishPuzzleEvent(this.player, this, this.playerSolution.moves.size(), solved, this.isSolving, this.playerSolution, this.solution);
 			Bukkit.getPluginManager().callEvent(event);
 		}
 
