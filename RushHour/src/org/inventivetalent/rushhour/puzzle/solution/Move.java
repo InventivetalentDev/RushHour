@@ -5,9 +5,12 @@ import org.inventivetalent.rushhour.puzzle.Direction;
 
 public class Move {
 
-	public Variant   variant;
-	public Direction direction;
-	public int       moves;
+	public final Variant   variant;
+	public final Direction direction;
+	public final int       moves;
+
+	//Only for moves performed by a player
+	public long timestamp = 0L;
 
 	public Move(Variant variant, Direction direction, int moves) {
 		this.variant = variant;
