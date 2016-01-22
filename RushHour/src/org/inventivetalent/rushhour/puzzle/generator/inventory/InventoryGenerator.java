@@ -1,5 +1,6 @@
 package org.inventivetalent.rushhour.puzzle.generator.inventory;
 
+import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -9,6 +10,7 @@ import org.inventivetalent.itembuilder.ItemBuilder;
 import org.inventivetalent.menubuilder.MenuBuilderPlugin;
 import org.inventivetalent.menubuilder.inventory.InventoryMenuBuilder;
 import org.inventivetalent.menubuilder.inventory.ItemListener;
+import org.inventivetalent.rushhour.event.PlayerBeginPuzzleEvent;
 import org.inventivetalent.rushhour.puzzle.Direction;
 import org.inventivetalent.rushhour.puzzle.GameCar;
 import org.inventivetalent.rushhour.puzzle.Puzzle;
@@ -163,7 +165,17 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	@Override
 	public void showTo(Player player) {
 		this.puzzle.player = player;
-		this.menuBuilder.show(player);
+
+		PlayerBeginPuzzleEvent event = new PlayerBeginPuzzleEvent(player, this.puzzle);
+		Bukkit.getPluginManager().callEvent(event);
+
+		if (!event.isCancelled()) {
+			this.menuBuilder.show(player);
+		} else {
+			clearCars();
+			resetListeners();
+			this.menuBuilder.dispose();
+		}
 	}
 
 }
