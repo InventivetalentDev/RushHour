@@ -86,7 +86,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 		//Help item
 		//TODO: Check permission before adding
-		this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, this.moveCount).buildMeta().withDisplayName("§aShow solution").item().build(), new ItemListener() {
+		this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, 1).buildMeta().withDisplayName("§aShow solution").item().build(), new ItemListener() {
 			@Override
 			public void onInteract(Player player, ClickType clickType, ItemStack itemStack) {
 				//TODO: Check permission
