@@ -19,6 +19,9 @@ public class RushHour extends JavaPlugin {
 
 		if (!puzzleFolder.exists()) {
 			puzzleFolder.mkdirs();
+
+			//Save the included puzzles
+			saveResource("/puzzles", false);
 		}
 	}
 
