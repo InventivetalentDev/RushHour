@@ -40,7 +40,7 @@
     {
       "x": 0,
       "y": 5,
-      "variant": "C_BROWN",
+      "variant": "C_GRAY",
       "rotation": "HORIZONTAL"
     },
     {
@@ -52,7 +52,7 @@
     {
       "x": 4,
       "y": 4,
-      "variant": "C_BLACK",
+      "variant": "C_BROWN",
       "rotation": "HORIZONTAL"
     },
     {
@@ -64,7 +64,7 @@
     {
       "x": 5,
       "y": 2,
-      "variant": "C_GRAY",
+      "variant": "C_BLACK",
       "rotation": "VERTICAL"
     },
     {
