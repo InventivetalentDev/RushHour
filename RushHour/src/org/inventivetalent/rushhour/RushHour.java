@@ -398,7 +398,7 @@ public class RushHour extends JavaPlugin {
 				list.add("stats");
 			}
 		}
-		if (args.length == 2) {
+		if (args.length >= 2) {
 			if ("play".equalsIgnoreCase(args[0])) {
 				if (sender.hasPermission("rushhour.play")) {
 					for (Iterator<File> iterator = FileUtils.iterateFiles(puzzleFolder, null, true); iterator.hasNext(); ) {
@@ -415,6 +415,14 @@ public class RushHour extends JavaPlugin {
 				if (sender.hasPermission("rushhour.stats")) {
 					List<String> levels = this.scoreManager.getLocalScoreManager().getPlayedPuzzleNames((Player) sender);
 					list.addAll(levels);
+
+					if (args.length == 2 && sender.hasPermission("rushhour.stats.other")) {
+						for (Player player : Bukkit.getOnlinePlayers()) {
+							if (((Player) sender).canSee(player)) {
+								list.add(player.getName());
+							}
+						}
+					}
 				}
 			}
 		}
