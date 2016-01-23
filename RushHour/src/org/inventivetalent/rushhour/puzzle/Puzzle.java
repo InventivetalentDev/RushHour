@@ -44,6 +44,7 @@ import org.inventivetalent.rushhour.puzzle.solution.Solution;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -83,6 +84,8 @@ public class Puzzle {
 	public Player player;
 
 	public AbstractPuzzleGenerator generator;
+
+	private String hash;
 
 	public Puzzle() {
 	}
@@ -222,6 +225,13 @@ public class Puzzle {
 
 	public String getLevelPerm() {
 		return this.name.replace("/", ".").replace("\\", ".");
+	}
+
+	public String getHash() {
+		if (hash == null) {
+			hash = Base64.getEncoder().encodeToString(toJson().getBytes());
+		}
+		return hash;
 	}
 
 	public void toJson(Writer writer) {
