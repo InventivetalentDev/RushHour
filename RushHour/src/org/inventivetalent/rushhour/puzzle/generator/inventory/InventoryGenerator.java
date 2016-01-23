@@ -202,7 +202,6 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		puzzle.initializeCars();
 		puzzle.addCarsToInventory(this);
 
-		//		this.menuBuilder.withTitle(RushHour.messageContainer.getMessage("inventory.title", this.puzzle.name, this.puzzle.difficulty)  /*"§c§lRush§e§lHour  §8\"" + this.puzzle.name + "\"§r  " + this.puzzle.difficulty*/);
 		this.menuBuilder.withTitle(RushHour.messageContainer.getMessage("inventory.title")  /*"§c§lRush§e§lHour  §8\"" + this.puzzle.name + "\"§r  " + this.puzzle.difficulty*/);
 	}
 
@@ -223,20 +222,6 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		if (moveDirection != null) {
 			boolean canMove = puzzle.checkCollision(car, car.bounds.shift(moveDirection));
 			displayName = RushHour.messageContainer.getMessage("inventory.game.move." + (canMove ? "enabled" : "disabled") + "." + moveDirection.name().toLowerCase());
-			//			switch (moveDirection) {
-			//				case LEFT:
-			//					if (canMove) { displayName = " §e< "; } else { displayName = " §7< "; }
-			//					break;
-			//				case RIGHT:
-			//					if (canMove) { displayName = " §e> "; } else { displayName = " §7> "; }
-			//					break;
-			//				case UP:
-			//					if (canMove) { displayName = " §e^ "; } else { displayName = " §7^ "; }
-			//					break;
-			//				case DOWN:
-			//					if (canMove) { displayName = " §ev "; } else { displayName = " §7v "; }
-			//					break;
-			//			}
 		}
 
 		setCar(x, y, car.variant.getColor(), displayName, new ItemListener() {
