@@ -28,6 +28,7 @@
 
 package org.inventivetalent.rushhour;
 
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -52,6 +53,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -381,6 +383,43 @@ public class RushHour extends JavaPlugin {
 		}
 
 		return false;
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+		ArrayList<String> list = new ArrayList<>();
+		if (!(sender instanceof Player)) { return list; }
+
+		if (args.length == 1) {
+			if (sender.hasPermission("rushhour.play")) {
+				list.add("play");
+			}
+			if (sender.hasPermission("rushhour.stats")) {
+				list.add("stats");
+			}
+		}
+		if (args.length == 2) {
+			if ("play".equalsIgnoreCase(args[0])) {
+				if (sender.hasPermission("rushhour.play")) {
+					for (Iterator<File> iterator = FileUtils.iterateFiles(puzzleFolder, null, true); iterator.hasNext(); ) {
+						File file = iterator.next();
+						if (file.getName().endsWith(".rh")) {
+							String puzzleName = file.getAbsolutePath().substring(file.getAbsolutePath().indexOf(File.separator + "plugins" + File.separator + "RushHour" + File.separator + "puzzles" + File.separator) + (File.separator + "plugins" + File.separator + "RushHour" + File.separator + "puzzles" + File.separator).length());
+							puzzleName = puzzleName.substring(0, puzzleName.length() - ".rh".length());
+							list.add(puzzleName);
+						}
+					}
+				}
+			}
+			if ("stats".equalsIgnoreCase(args[0])) {
+				if (sender.hasPermission("rushhour.stats")) {
+					List<String> levels = this.scoreManager.getLocalScoreManager().getPlayedPuzzleNames((Player) sender);
+					list.addAll(levels);
+				}
+			}
+		}
+
+		return TabCompletionHelper.getPossibleCompletionsForGivenArgs(args, list.toArray(new String[list.size()]));
 	}
 
 	//https://stackoverflow.com/questions/11012819/how-can-i-get-a-resource-folder-from-inside-my-jar-file
