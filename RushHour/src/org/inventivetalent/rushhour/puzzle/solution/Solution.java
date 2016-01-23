@@ -33,12 +33,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.inventivetalent.rushhour.car.Variant;
+import org.inventivetalent.rushhour.exception.InvalidSolutionException;
 import org.inventivetalent.rushhour.puzzle.Direction;
 import org.inventivetalent.rushhour.puzzle.Puzzle;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 public class Solution {
 
@@ -68,20 +70,25 @@ public class Solution {
 
 			@Override
 			public void run() {
-				if (currentMove >= moveList.size()) {
-					cancel();
-					return;
-				}
+				try {
+					if (currentMove >= moveList.size()) {
+						cancel();
+						return;
+					}
 
-				Move move = moveList.get(currentMove);
-				if (currentMoveStep >= move.moves) {
-					currentMove += 1;
-					currentMoveStep = 0;
-					return;
-				}
+					Move move = moveList.get(currentMove);
+					if (currentMoveStep >= move.moves) {
+						currentMove += 1;
+						currentMoveStep = 0;
+						return;
+					}
 
-				move.executeSingleMove(puzzle);
-				currentMoveStep += 1;
+					move.executeSingleMove(puzzle);
+					currentMoveStep += 1;
+				} catch (InvalidSolutionException e) {
+					Bukkit.getPluginManager().getPlugin("RushHour").getLogger().log(Level.SEVERE, "Invalid Solution for puzzle " + puzzle.name, e);
+					Bukkit.getPluginManager().getPlugin("RushHour").getLogger().log(Level.SEVERE, "Please make sure the puzzle file is correct and report this to the author.");
+				}
 			}
 		}.runTaskTimer(Bukkit.getPluginManager().getPlugin("RushHour"), interval, interval);
 	}

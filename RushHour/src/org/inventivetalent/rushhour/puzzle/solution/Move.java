@@ -29,6 +29,7 @@
 package org.inventivetalent.rushhour.puzzle.solution;
 
 import org.inventivetalent.rushhour.car.Variant;
+import org.inventivetalent.rushhour.exception.InvalidSolutionException;
 import org.inventivetalent.rushhour.puzzle.Direction;
 import org.inventivetalent.rushhour.puzzle.GameCar;
 import org.inventivetalent.rushhour.puzzle.Puzzle;
@@ -68,23 +69,23 @@ public class Move {
 		return new StringBuilder().append(this.variant.getIdentifier()).append(this.direction.getCode()).append(this.moves).toString();
 	}
 
-	public void executeMove(Puzzle puzzle) {
+	public void executeMove(Puzzle puzzle) throws InvalidSolutionException {
 		GameCar targetCar = null;
 		for (GameCar car : puzzle.cars) {
 			if (car.variant == this.variant) { targetCar = car; }
 		}
-		if (targetCar == null) { throw new IllegalStateException("The puzzle does not contain the car of this move (" + this.variant + ")"); }
+		if (targetCar == null) { throw new InvalidSolutionException("The puzzle does not contain the car of this move (" + this.variant + ")"); }
 		for (int i = 0; i < this.moves; i++) {
 			puzzle.moveCar(targetCar, this.direction);
 		}
 	}
 
-	public void executeSingleMove(Puzzle puzzle) {
+	public void executeSingleMove(Puzzle puzzle) throws InvalidSolutionException {
 		GameCar targetCar = null;
 		for (GameCar car : puzzle.cars) {
 			if (car.variant == this.variant) { targetCar = car; }
 		}
-		if (targetCar == null) { throw new IllegalStateException("The puzzle does not contain the car of this move (" + this.variant + ")"); }
+		if (targetCar == null) { throw new InvalidSolutionException("The puzzle does not contain the car of this move (" + this.variant + ")"); }
 		puzzle.moveCar(targetCar, this.direction);
 	}
 
