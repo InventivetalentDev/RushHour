@@ -51,10 +51,13 @@ public class InventoryListener implements Listener {
 			if (values.isEmpty()) {
 				return;
 			}
-			AbstractPuzzleGenerator generator = (AbstractPuzzleGenerator) values.get(0).value();
-			if (generator instanceof InventoryGenerator) {
-				if (((InventoryGenerator) generator).menuBuilder.getInventory().equals(inventory)) {
-					((InventoryGenerator) generator).puzzle.puzzleFinished(false);
+			Object value = values.get(0).value();
+			if (value instanceof AbstractPuzzleGenerator) {
+				AbstractPuzzleGenerator generator = (AbstractPuzzleGenerator) value;
+				if (generator instanceof InventoryGenerator) {
+					if (((InventoryGenerator) generator).menuBuilder.getInventory().equals(inventory)) {
+						((InventoryGenerator) generator).puzzle.puzzleFinished(false);
+					}
 				}
 			}
 		}
