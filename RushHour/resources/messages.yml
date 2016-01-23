@@ -34,6 +34,7 @@ command:
           general: "&eLoading stats for %s..."
           level: "&eLoading stats for %s-%s..."
     error:
+      notEnabled: "&cLocal stats are not enabled"
       noPlayer: "&cYou must be a player to view stats"
       player:
         notFound: "&cPlayer not found"

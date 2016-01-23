@@ -66,6 +66,8 @@ public class RushHour extends JavaPlugin {
 
 	public static int SIGN_LEVEL_LINE = 1;
 
+	public static boolean LOCAL_STATS_ENABLED = true;
+
 	public static MessageContainer messageContainer;
 
 	public ScoreManager scoreManager;
@@ -76,6 +78,7 @@ public class RushHour extends JavaPlugin {
 
 		CAR_MATERIAL = Material.valueOf(getConfig().getString("puzzle.inventory.car.material"));
 		SIGN_LEVEL_LINE = getConfig().getInt("sign.levelLine");
+		LOCAL_STATS_ENABLED = getConfig().getBoolean("stats.local.enabled");
 
 		if (!puzzleFolder.exists()) {
 			//Save the included puzzles
@@ -109,6 +112,7 @@ public class RushHour extends JavaPlugin {
 				.withMessage("command.stats.info.loading.level", "§eLoading stats for %s....")//
 				.withMessage("command.stats.info.loading.player.general", "§eLoading stats for %s...")//
 				.withMessage("command.stats.info.loading.player.level", "§eLoading stats for %s-%s...")//
+				.withMessage("command.stats.error.notEnabled", "&cLocal stats are not enabled")//
 				.withMessage("command.stats.error.noPlayer", "§cYou must be a player to view stats")//
 				.withMessage("command.stats.error.player.notFound", "§cPlayer not found")//
 				.withMessage("command.stats.error.permission.command", "§cYou are not permitted to view stats")//
@@ -148,8 +152,10 @@ public class RushHour extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
 		Bukkit.getPluginManager().registerEvents(new SignListener(), this);
 
-		scoreManager = new ScoreManager(this);
-		Bukkit.getPluginManager().registerEvents(new ScoreListener(this), this);
+		if (LOCAL_STATS_ENABLED) {
+			scoreManager = new ScoreManager(this);
+			Bukkit.getPluginManager().registerEvents(new ScoreListener(this), this);
+		}
 	}
 
 	@Override
@@ -166,7 +172,7 @@ public class RushHour extends JavaPlugin {
 			//				sender.sendMessage("§aSpectate a player");
 			//				sender.sendMessage("§e/rushhour spectate <player>");
 			//			}
-			if (sender.hasPermission("rushhour.stats")) {
+			if (sender.hasPermission("rushhour.stats") && LOCAL_STATS_ENABLED) {
 				sender.sendMessage("  ");
 				sender.sendMessage("§aShow your stats");
 				sender.sendMessage("§e/rushhour stats [level]");
@@ -242,6 +248,10 @@ public class RushHour extends JavaPlugin {
 			}
 			if (!sender.hasPermission("rushhour.stats")) {
 				sender.sendMessage(messageContainer.getMessage("command.stats.error.permission.command"));
+				return false;
+			}
+			if (!LOCAL_STATS_ENABLED) {
+				sender.sendMessage(messageContainer.getMessage("commands.stats.error.notEnabled"));
 				return false;
 			}
 			Player player = null;
@@ -391,7 +401,9 @@ public class RushHour extends JavaPlugin {
 	@Override
 	public List<Class<?>> getDatabaseClasses() {
 		List<Class<?>> list = new ArrayList<>();
-		list.add(PlayerScore.class);
+		if (LOCAL_STATS_ENABLED) {
+			list.add(PlayerScore.class);
+		}
 		return list;
 	}
 

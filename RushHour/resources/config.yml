@@ -4,3 +4,6 @@ puzzle:
       material: "STAINED_CLAY"
 sign:
   levelLine: 1
+stats:
+  local:
+    enabled: true
