@@ -273,9 +273,9 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		generateBase();
 
 		if (solved) {
-			puzzle.player.playSound(puzzle.player.getEyeLocation(), Sound.NOTE_PLING, 1.0f, 2.0f);
-			puzzle.player.playSound(puzzle.player.getEyeLocation(), Sound.CLICK, 1.0f, 1.0f);
-			puzzle.player.playSound(puzzle.player.getEyeLocation(), Sound.LEVEL_UP, 0.8f, 1.5f);
+			puzzle.playSound(Sound.NOTE_PLING, 1.0f, 2.0f);
+			puzzle.playSound(Sound.CLICK, 1.0f, 1.0f);
+			puzzle.playSound(Sound.LEVEL_UP, 0.8f, 1.5f);
 		}
 	}
 
