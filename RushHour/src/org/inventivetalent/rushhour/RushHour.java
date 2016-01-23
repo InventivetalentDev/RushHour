@@ -146,6 +146,11 @@ public class RushHour extends JavaPlugin {
 				.withMessage("inventory.game.move.enabled.up", " §e^ ")//
 				.withMessage("inventory.game.move.enabled.down", " §ev ")//
 
+				.withMessage("solution.beginner.name", "§2BEGINNER")//
+				.withMessage("solution.intermediate.name", "§6INTERMEDIATE")//
+				.withMessage("solution.advanced.name", "§9ADVANCED")//
+				.withMessage("solution.expert.name", "§cEXPERT")//
+
 				.withMessage("solution.error.permission.level", "§cYou are not permitted to view the solution for this level")//
 				.withMessage("solution.error.missing", "§cSorry, I don't know how to solve this level")//
 				.withMessage("solution.info.solving", "§ePlaying solution...")//

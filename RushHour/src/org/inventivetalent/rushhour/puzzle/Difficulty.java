@@ -29,6 +29,7 @@
 package org.inventivetalent.rushhour.puzzle;
 
 import org.bukkit.ChatColor;
+import org.inventivetalent.rushhour.RushHour;
 
 public enum Difficulty {
 
@@ -47,8 +48,12 @@ public enum Difficulty {
 		return color;
 	}
 
+	public String getName() {
+		return RushHour.messageContainer.getMessage("difficulty." + name().toLowerCase() + ".name");
+	}
+
 	@Override
 	public String toString() {
-		return getColor() + name();
+		return getColor() + getName();
 	}
 }

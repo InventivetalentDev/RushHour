@@ -70,6 +70,16 @@ inventory:
         up: " &e^ "
         down: " &ev "
 
+difficulty:
+  beginner:
+    name: "&2BEGINNER"
+  intermediate:
+    name: "&6INTERMEDIATE"
+  advanced:
+    name: "&9ADVANCED"
+  expert:
+    name: "&cEXPERT"
+
 solution:
   error:
     permission:
