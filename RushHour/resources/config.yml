@@ -12,3 +12,4 @@ stats:
   local:
     #If local stats should be enabled (/rushhour stats)
     enabled: true
+dateFormat: "dd/MM/yyyy HH:mm"

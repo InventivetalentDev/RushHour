@@ -24,7 +24,7 @@ command:
           played:
             amount: "&7Times played: &e%s"
           time:
-            best: "&7Best time: &e%d:%02d:%02d.%d"
+            best: "&7Best time: &e%d:%02d:%02d.%d &7(%s)"
           solution:
             best: "&7Shortest solution: &e%s Moves &7(%s individual moves)"
       loading:

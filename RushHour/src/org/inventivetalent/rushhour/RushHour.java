@@ -52,6 +52,7 @@ import org.mcstats.MetricsLite;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -72,6 +73,8 @@ public class RushHour extends JavaPlugin {
 
 	public static boolean LOCAL_STATS_ENABLED = true;
 
+	public static SimpleDateFormat DATE_FORMAT;
+
 	public static MessageContainer messageContainer;
 
 	public ScoreManager scoreManager;
@@ -84,6 +87,7 @@ public class RushHour extends JavaPlugin {
 		SIGN_LEVEL_LINE = getConfig().getInt("sign.levelLine");
 		SIGN_ACTION_LINE = getConfig().getInt("sign.actionLine");
 		LOCAL_STATS_ENABLED = getConfig().getBoolean("stats.local.enabled");
+		DATE_FORMAT = new SimpleDateFormat(getConfig().getString("dateFormat"));
 
 		if (!puzzleFolder.exists()) {
 			//Save the included puzzles
@@ -111,7 +115,7 @@ public class RushHour extends JavaPlugin {
 				.withMessage("command.stats.level.name", "§7Level name: §e%s")//
 				.withMessage("command.stats.level.difficulty", "§7Difficulty: §e%s")//
 				.withMessage("command.stats.level.played.amount", "§7Times played: §e%s")//
-				.withMessage("command.stats.level.time.best", "§7Best time: §e%d:%02d:%02d.%d")//
+				.withMessage("command.stats.level.time.best", "§7Best time: §e%d:%02d:%02d.%d §7(%s)")//
 				.withMessage("command.stats.level.solution.best", "§7Shortest solution: §e%s Moves §7(%s individual moves)")//
 				.withMessage("command.stats.info.loading.general", "§eLoading stats...")//
 				.withMessage("command.stats.info.loading.level", "§eLoading stats for %s....")//
@@ -369,12 +373,16 @@ public class RushHour extends JavaPlugin {
 			}
 
 			long bestTime = Long.MAX_VALUE;
+			Score bestTimeScore = null;
 
 			int bestSolutionLength = Integer.MAX_VALUE;
 			Solution bestSolution = null;
 
 			for (Score score : scores) {
-				if (score.duration < bestTime) { bestTime = score.duration; }
+				if (score.duration < bestTime) {
+					bestTime = score.duration;
+					bestTimeScore = score;
+				}
 
 				if (score.solution.moves.size() < bestSolutionLength) {
 					bestSolutionLength = score.solution.moves.size();
@@ -385,7 +393,7 @@ public class RushHour extends JavaPlugin {
 			sender.sendMessage(messageContainer.getMessage("command.stats.info.stats.level.name", puzzle.name));
 			sender.sendMessage(messageContainer.getMessage("command.stats.info.stats.level.difficulty", puzzle.difficulty));
 			sender.sendMessage(messageContainer.getMessage("command.stats.info.stats.level.played.amount", scores.size()));
-			sender.sendMessage(messageContainer.getMessage("command.stats.info.stats.level.time.best", (int) ((bestTime / 1000) / 3600), (int) (((bestTime / 1000) % 3600) / 60), (int) ((bestTime / 1000) % 60), bestTime));
+			sender.sendMessage(messageContainer.getMessage("command.stats.info.stats.level.time.best", (int) ((bestTime / 1000) / 3600), (int) (((bestTime / 1000) % 3600) / 60), (int) ((bestTime / 1000) % 60), bestTime, DATE_FORMAT.format(bestTimeScore != null ? bestTimeScore.timestamp : 0L)));
 			sender.sendMessage(messageContainer.getMessage("command.stats.info.stats.level.solution.best", (bestSolution != null ? bestSolution.combineMoves().moves.size() : 0), bestSolutionLength));
 
 			return true;
