@@ -140,6 +140,11 @@ public class Solution {
 		return array;
 	}
 
+	@Override
+	public String toString() {
+		return toJsonArray().toString();
+	}
+
 	public static class Serializer implements JsonDeserializer<Solution>, JsonSerializer<Solution> {
 
 		@Override
