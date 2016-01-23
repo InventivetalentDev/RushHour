@@ -1,0 +1,82 @@
+{
+  "difficulty": "BEGINNER",
+  "cars": [
+    {
+      "x": 2,
+      "y": 1,
+      "variant": "MAIN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "variant": "C_LIME",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "variant": "T_PINK",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "variant": "C_PINK",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "variant": "T_YELLOW",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "variant": "T_CYAN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "variant": "T_BLUE",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "variant": "C_PURPLE",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "variant": "C_GREEN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "variant": "C_ORANGE",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "variant": "C_BLACK",
+      "rotation": "VERTICAL"
+    }
+  ],
+  "solution": [
+    "EL3",
+    "GD1",
+    "FL3",
+    "QD2",
+    "AR1",
+    "PU1",
+    "RL1",
+    "OD3",
+    "XR5"
+  ]
+}
