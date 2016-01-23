@@ -37,9 +37,8 @@ public class ScoreManager {
 
 	private LocalScoreManager localScoreManager;
 
-
 	public ScoreManager(RushHour plugin) {
-		this.plugin=plugin;
+		this.plugin = plugin;
 
 		this.localScoreManager = new LocalScoreManager(plugin);
 	}
