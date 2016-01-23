@@ -159,7 +159,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 					player.playSound(player.getEyeLocation(), Sound.NOTE_STICKS, 1.0f, 1.0f);
 
 					player.sendMessage(RushHour.messageContainer.getMessage("solution.info.solving"));
-					puzzle.solution.solve(puzzle, 10);
+					puzzle.solution.solve(puzzle, RushHour.SOLUTION_INTERVAL);
 				}
 			}, InventoryMenuBuilder.ALL_CLICK_TYPES);
 		}

@@ -75,6 +75,8 @@ public class RushHour extends JavaPlugin {
 
 	public static SimpleDateFormat DATE_FORMAT;
 
+	public static long SOLUTION_INTERVAL = 20;
+
 	public static MessageContainer messageContainer;
 
 	public ScoreManager scoreManager;
@@ -88,6 +90,7 @@ public class RushHour extends JavaPlugin {
 		SIGN_ACTION_LINE = getConfig().getInt("sign.actionLine");
 		LOCAL_STATS_ENABLED = getConfig().getBoolean("stats.local.enabled");
 		DATE_FORMAT = new SimpleDateFormat(getConfig().getString("dateFormat"));
+		SOLUTION_INTERVAL = getConfig().getLong("solutionInterval");
 
 		if (!puzzleFolder.exists()) {
 			//Save the included puzzles

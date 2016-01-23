@@ -12,4 +12,7 @@ stats:
   local:
     #If local stats should be enabled (/rushhour stats)
     enabled: true
+#Format for date and time (See https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html for more information)
 dateFormat: "dd/MM/yyyy HH:mm"
+#Interval of solution moves (20 = 1 second)
+solutionInterval: 10
