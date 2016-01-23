@@ -151,7 +151,6 @@ public class Puzzle {
 	}
 
 	public void moveCar(GameCar car, Direction direction) {
-		Bounds prevBounds = car.bounds;
 		Bounds target = car.bounds.shift(direction);
 		if (!checkCollision(car, target)) {
 			player.playSound(player.getEyeLocation(), Sound.NOTE_BASS, 0.8f, 0.8f);
@@ -163,14 +162,11 @@ public class Puzzle {
 		player.playSound(player.getEyeLocation(), Sound.NOTE_STICKS, 1.0f, 0.8f);
 		player.playSound(player.getEyeLocation(), Sound.PISTON_EXTEND, 0.05f, 0.7f);
 
-		System.out.println("Car " + car + " moved " + direction + " (from " + prevBounds.x() + "|" + prevBounds.y() + " to " + target.x() + "|" + target.y() + " )");
-
 		playerSolution.trackPlayerMove(null, car.variant, direction, 1);
 		generator.updateMoves(playerSolution.combineMoves().moves.size(), playerSolution.moves.size());
 
 		if (FINISH_BOUNDS.collidesWith(target)) {
 			if (car.variant == Variant.MAIN) {
-				System.out.println("Puzzle finished!!!");
 				puzzleFinished(true);
 			} else {
 				throw new IllegalStateException("Car managed to reach finish position but it's not the MAIN variant!");
@@ -184,7 +180,6 @@ public class Puzzle {
 	public boolean checkCollision(Car movingCar, Bounds targetBounds) {
 		for (Bounds bounds : WALL_BOUNDS) {
 			if (targetBounds.collidesWith(bounds)) {
-				System.out.println("Wall collision");
 				return false;
 			}
 		}
@@ -193,8 +188,6 @@ public class Puzzle {
 				continue;
 			}
 			if (car.bounds.collidesWith(targetBounds)) {
-				System.out.println("Car collision " + movingCar);
-				System.out.println("  With " + car);
 				return false;
 			}
 		}
@@ -216,7 +209,6 @@ public class Puzzle {
 
 			Runtime.getRuntime().gc();
 		} else {
-			System.out.println("!isFinished || solved");
 		}
 
 		this.generator.gameFinished(solved, this.isSolving);
