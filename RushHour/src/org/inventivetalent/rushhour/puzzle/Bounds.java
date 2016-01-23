@@ -77,15 +77,6 @@ public class Bounds extends Rectangle {
 	}
 
 	public boolean collidesWith(Bounds other) {
-		//		System.out.println("Other:");
-		//		System.out.println("+" + (int) other.getMinX() + "|" + (int) other.getMinY() + "\t\t+");
-		//		System.out.println("+    \t\t+" + (int) other.getMaxX() + "|" + (int) other.getMaxY());
-		//
-		//		System.out.println("This:");
-		//		System.out.println("+" + (int) getMinX() + "|" + (int) getMinY() + "\t\t+");
-		//		System.out.println("+    \t\t+" + (int) getMaxX() + "|" + (int) getMaxY());
-		//		System.out.println("   ");
-
 		return this.getMaxX() >= other.getMinX() &&//
 				this.getMinX() <= other.getMaxX() &&//
 				this.getMaxY() >= other.getMinY() &&//
