@@ -26,12 +26,6 @@
       "rotation": "VERTICAL"
     },
     {
-      "x": 5,
-      "y": 1,
-      "variant": "T_YELLOW",
-      "rotation": "VERTICAL"
-    },
-    {
       "x": 2,
       "y": 1,
       "variant": "C_PINK",
@@ -63,15 +57,23 @@
     },
     {
       "x": 4,
+      "y": 5,
+      "variant": "C_GRAY",
+      "rotation": "HORIZONTAL"
+    },
+
+
+    {
+      "x": 4,
       "y": 4,
       "variant": "C_SILVER",
       "rotation": "HORIZONTAL"
     },
     {
-      "x": 4,
-      "y": 5,
-      "variant": "C_BROWN",
-      "rotation": "HORIZONTAL"
+      "x": 5,
+      "y": 1,
+      "variant": "T_YELLOW",
+      "rotation": "VERTICAL"
     },
     {
       "x": 3,
