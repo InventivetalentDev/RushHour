@@ -1,0 +1,96 @@
+{
+  "difficulty": "BEGINNER",
+  "cars": [
+    {
+      "x": 1,
+      "y": 2,
+      "variant": "MAIN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "variant": "C_LIME",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "variant": "C_PINK",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "variant": "T_PINK",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "variant": "C_BLACK",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "variant": "T_BLUE",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "variant": "C_PURPLE",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "variant": "C_GREEN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "variant": "C_SILVER",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "variant": "T_YELLOW",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "variant": "C_BLUE",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "variant": "C_ORANGE",
+      "rotation": "VERTICAL"
+    }
+  ],
+  "solution": [
+    "CL1",
+    "OU1",
+    "QR2",
+    "XR2",
+    "BD4",
+    "DR1",
+    "AR1",
+    "PU2",
+    "QL3",
+    "XL2",
+    "EU3",
+    "HL1",
+    "FL1",
+    "OD3",
+    "CR1",
+    "EU1",
+    "XR5"
+  ]
+}
