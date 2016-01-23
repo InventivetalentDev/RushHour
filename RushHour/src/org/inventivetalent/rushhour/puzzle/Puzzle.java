@@ -59,7 +59,7 @@ public class Puzzle {
 			new Bounds(-1, 0, Rotation.VERTICAL, 6),
 
 	/*Right wall (upper)*/
-			new Bounds(6, 0, Rotation.VERTICAL, 1),
+			new Bounds(6, 0, Rotation.VERTICAL, 2),
 	/*Right wall (lower)*/
 			new Bounds(6, 3, Rotation.VERTICAL, 3),
 
