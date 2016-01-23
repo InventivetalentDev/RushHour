@@ -2,10 +2,16 @@
   "difficulty": "BEGINNER",
   "cars": [
     {
-      "x": 2,
-      "y": 1,
+      "x": 1,
+      "y": 2,
       "variant": "MAIN",
       "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "variant": "T_YELLOW",
+      "rotation": "VERTICAL"
     },
     {
       "x": 0,
@@ -14,32 +20,26 @@
       "rotation": "HORIZONTAL"
     },
     {
-      "x": 1,
-      "y": 0,
+      "x": 0,
+      "y": 1,
       "variant": "T_PINK",
       "rotation": "VERTICAL"
     },
     {
-      "x": 4,
-      "y": 0,
+      "x": 0,
+      "y": 4,
       "variant": "C_PINK",
       "rotation": "VERTICAL"
     },
     {
-      "x": 0,
+      "x": 1,
       "y": 3,
-      "variant": "T_YELLOW",
-      "rotation": "VERTICAL"
-    },
-    {
-      "x": 3,
-      "y": 1,
       "variant": "T_CYAN",
       "rotation": "HORIZONTAL"
     },
     {
-      "x": 1,
-      "y": 4,
+      "x": 4,
+      "y": 1,
       "variant": "T_BLUE",
       "rotation": "VERTICAL"
     },
@@ -50,20 +50,20 @@
       "rotation": "HORIZONTAL"
     },
     {
-      "x": 5,
-      "y": 4,
+      "x": 4,
+      "y": 5,
       "variant": "C_GREEN",
       "rotation": "HORIZONTAL"
     },
     {
-      "x": 0,
-      "y": 5,
+      "x": 5,
+      "y": 0,
       "variant": "C_ORANGE",
       "rotation": "VERTICAL"
     },
     {
-      "x": 2,
-      "y": 5,
+      "x": 5,
+      "y": 2,
       "variant": "C_BLACK",
       "rotation": "VERTICAL"
     }
