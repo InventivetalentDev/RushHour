@@ -30,6 +30,7 @@ package org.inventivetalent.rushhour.puzzle;
 
 import com.google.gson.*;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -178,7 +179,8 @@ public class Puzzle {
 	}
 
 	public void playSound(Sound sound, float volume, float pitch) {
-		player.playSound(player.getEyeLocation(), sound, volume, pitch);
+		Location location = player.getEyeLocation();
+		player.playSound(location.getDirection().multiply(2.0).add(location.toVector()).toLocation(location.getWorld()), sound, volume, pitch);
 	}
 
 	public boolean checkCollision(Car movingCar, Bounds targetBounds) {
