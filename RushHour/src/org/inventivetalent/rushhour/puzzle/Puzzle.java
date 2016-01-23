@@ -28,8 +28,7 @@
 
 package org.inventivetalent.rushhour.puzzle;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -44,12 +43,13 @@ import org.inventivetalent.rushhour.puzzle.solution.Solution;
 
 import java.io.Reader;
 import java.io.Writer;
+import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Puzzle {
 
-	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Solution.class, new Solution.Serializer()).create();
+	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Puzzle.class, new Puzzle.Serializer()).registerTypeAdapter(Solution.class, new Solution.Serializer()).create();
 
 	public static final Bounds[] WALL_BOUNDS   = new Bounds[] {
 	/*Left wall*/
@@ -228,8 +228,44 @@ public class Puzzle {
 		GSON.toJson(this, writer);
 	}
 
+	public String toJson() {
+		return GSON.toJson(this);
+	}
+
 	public static Puzzle fromJson(Reader reader) {
 		return GSON.fromJson(reader, Puzzle.class);
+	}
+
+	public static class Serializer implements JsonSerializer<Puzzle> {
+
+		@Override
+		public JsonElement serialize(Puzzle puzzle, Type type, JsonSerializationContext jsonSerializationContext) {
+			JsonObject jsonObject = new JsonObject();
+
+			jsonObject.addProperty("name", puzzle.name);
+			jsonObject.addProperty("difficulty", puzzle.difficulty.name());
+
+			JsonArray carArray = new JsonArray();
+			for (Car car : puzzle.cars) {
+				JsonObject carObject = new JsonObject();
+				carObject.addProperty("x", car.x);
+				carObject.addProperty("y", car.y);
+				carObject.addProperty("variant", car.variant.name());
+				carObject.addProperty("rotation", car.rotation.name());
+
+				carArray.add(carObject);
+			}
+			jsonObject.add("cars", carArray);
+
+			if (puzzle.solution == null) {
+				jsonObject.add("solution", new JsonArray());
+			} else {
+				jsonObject.add("solution", puzzle.solution.toJsonArray());
+			}
+
+			return jsonObject;
+		}
+
 	}
 
 }
