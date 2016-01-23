@@ -3,6 +3,8 @@ main: org.inventivetalent.rushhour.RushHour
 author: inventivetalent
 version: ${project.version}
 
+database: true
+
 softdepend: [MenuBuilder, ItemBuilder]
 
 commands:
