@@ -93,6 +93,8 @@ public class LocalScoreManager extends AbstractScoreManager {
 
 	@Override
 	public List<Solution> getPuzzleSolutions(OfflinePlayer player, String puzzleName) {
+		puzzleName = puzzleName.replace("/", "\\");
+
 		List<PlayerScore> scores = getPlayerScores(player);
 
 		List<Solution> solutions = new ArrayList<>();
@@ -125,6 +127,8 @@ public class LocalScoreManager extends AbstractScoreManager {
 
 	@Override
 	public List<Score> getScores(OfflinePlayer player, String puzzleName) {
+		puzzleName = puzzleName.replace("/", "\\");
+
 		List<Score> allScores = getScores(player);
 
 		List<Score> scores = new ArrayList<>();

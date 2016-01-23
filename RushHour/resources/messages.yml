@@ -11,6 +11,38 @@ command:
       permission:
         command: "&cYou are not permitted to use this command"
         level: "&cYou are not permitted to play this level"
+  stats:
+    info:
+      stats:
+        levels:
+          played:
+            self: "&eYou already played these levels:"
+            other: "&e%s already played these levels:"
+        level:
+          name: "&7Level name: &e%s"
+          difficulty: "&7Difficulty: &e%s"
+          played:
+            amount: "&7Times played: &e%s"
+          time:
+            best: "&7Best time: &e%d:%02d:%02d.%d"
+          solution:
+            best: "&7Shortest solution: &e%s Moves &7(%s individual moves)"
+      loading:
+        general: "&eLoading stats...."
+        level: "&eLoading stats for %s..."
+        player:
+          general: "&eLoading stats for %s..."
+          level: "&eLoading stats for %s-%s..."
+    error:
+      noPlayer: "&cYou must be a player to view stats"
+      player:
+        notFound: "&cPlayer not found"
+      level:
+        notFound: "&cLevel could not be found"
+        notPlayed: "&cYou have not played this level"
+      permission:
+        command: "&cYou are not permitted to view stats"
+        other: "&cYou are not permitted to view stats of other players"
 
 inventory:
   title: "&c&lRush&e&lHour"
