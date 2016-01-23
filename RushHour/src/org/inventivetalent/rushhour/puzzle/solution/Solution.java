@@ -42,6 +42,8 @@ import java.util.List;
 
 public class Solution {
 
+	public static Gson GSON = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Solution.class, new Solution.Serializer()).create();
+
 	public final List<Move> moves = new ArrayList<>();
 
 	public void trackPlayerMove(Player player, Move move) {
