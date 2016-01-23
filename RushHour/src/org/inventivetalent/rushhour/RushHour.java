@@ -47,6 +47,7 @@ import org.inventivetalent.rushhour.score.ScoreListener;
 import org.inventivetalent.rushhour.score.ScoreManager;
 import org.inventivetalent.rushhour.score.local.PlayerScore;
 import org.inventivetalent.rushhour.sign.SignListener;
+import org.mcstats.MetricsLite;
 
 import java.io.File;
 import java.io.FileReader;
@@ -159,6 +160,14 @@ public class RushHour extends JavaPlugin {
 		if (LOCAL_STATS_ENABLED) {
 			scoreManager = new ScoreManager(this);
 			Bukkit.getPluginManager().registerEvents(new ScoreListener(this), this);
+		}
+
+		try {
+			MetricsLite metrics = new MetricsLite(this);
+			if (metrics.start()) {
+				getLogger().info("Metrics started");
+			}
+		} catch (Exception e) {
 		}
 	}
 
