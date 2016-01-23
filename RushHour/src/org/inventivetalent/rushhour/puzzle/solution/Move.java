@@ -29,6 +29,7 @@
 package org.inventivetalent.rushhour.puzzle.solution;
 
 import org.inventivetalent.rushhour.car.Variant;
+import org.inventivetalent.rushhour.exception.InvalidMoveException;
 import org.inventivetalent.rushhour.exception.InvalidSolutionException;
 import org.inventivetalent.rushhour.puzzle.Direction;
 import org.inventivetalent.rushhour.puzzle.GameCar;
@@ -57,7 +58,7 @@ public class Move {
 
 	public static Move parse(String move) {
 		String[] split = move.split("");
-		if (split.length != 3) { throw new IllegalArgumentException(); }
+		if (split.length != 3) { throw new InvalidMoveException("Move string \"" + move + "\" is not valid"); }
 		char identifier = split[0].charAt(0);
 		char direction = split[1].charAt(0);
 		int moves = Integer.parseInt(split[2]);
