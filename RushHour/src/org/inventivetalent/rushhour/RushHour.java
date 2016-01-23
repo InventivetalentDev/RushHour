@@ -297,7 +297,7 @@ public class RushHour extends JavaPlugin {
 				}
 
 				//Level name (first with optional extension)
-				String level = args[1];
+				String level = args[2];
 				//Level name without extension
 				levelName = level;
 				if (level.endsWith(".rh")) {
