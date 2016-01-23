@@ -6,6 +6,8 @@ puzzle:
 sign:
   #Sign line where you want to specify the level name
   levelLine: 1
+  #Sign line where you want to specify the action (i.e. play, stats)
+  actionLine: 2
 stats:
   local:
     #If local stats should be enabled (/rushhour stats)

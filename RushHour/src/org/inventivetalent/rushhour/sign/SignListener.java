@@ -86,7 +86,14 @@ public class SignListener implements Listener {
 				return;
 			}
 
-			player.chat("/rushhour play " + levelName);
+			String action = "play";
+			String actionLine = sign.getLine(RushHour.SIGN_ACTION_LINE);
+			if (actionLine != null && !actionLine.isEmpty()) {
+				if (actionLine.equalsIgnoreCase("play")) { action = "play"; }
+				if (actionLine.equals("stats")) { action = "stats"; }
+			}
+
+			player.chat("/rushhour " + action + " " + levelName);
 		}
 	}
 

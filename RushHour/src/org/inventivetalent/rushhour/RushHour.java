@@ -64,7 +64,8 @@ public class RushHour extends JavaPlugin {
 
 	public static Material CAR_MATERIAL = Material.STAINED_CLAY;
 
-	public static int SIGN_LEVEL_LINE = 1;
+	public static int SIGN_LEVEL_LINE  = 1;
+	public static int SIGN_ACTION_LINE = 2;
 
 	public static boolean LOCAL_STATS_ENABLED = true;
 
@@ -78,6 +79,7 @@ public class RushHour extends JavaPlugin {
 
 		CAR_MATERIAL = Material.valueOf(getConfig().getString("puzzle.inventory.car.material"));
 		SIGN_LEVEL_LINE = getConfig().getInt("sign.levelLine");
+		SIGN_ACTION_LINE = getConfig().getInt("sign.actionLine");
 		LOCAL_STATS_ENABLED = getConfig().getBoolean("stats.local.enabled");
 
 		if (!puzzleFolder.exists()) {
