@@ -41,6 +41,7 @@ import org.inventivetalent.rushhour.puzzle.generator.AbstractPuzzleGenerator;
 import org.inventivetalent.rushhour.puzzle.generator.CarInteractListener;
 import org.inventivetalent.rushhour.puzzle.solution.Solution;
 
+import java.io.File;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
@@ -224,7 +225,7 @@ public class Puzzle {
 	}
 
 	public String getLevelPerm() {
-		return this.name.replace("/", ".").replace("\\", ".");
+		return this.name.replace(File.separator, ".");
 	}
 
 	public String getHash() {

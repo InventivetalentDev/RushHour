@@ -224,7 +224,7 @@ public class RushHour extends JavaPlugin {
 				return false;
 			}
 
-			if (!player.hasPermission("rushhour.play." + levelName.replace("/", ".").replace("\\", "."))) {
+			if (!player.hasPermission("rushhour.play." + levelName.replace(File.separator, "."))) {
 				sender.sendMessage(messageContainer.getMessage("command.play.error.permission.level"));
 				return false;
 			}

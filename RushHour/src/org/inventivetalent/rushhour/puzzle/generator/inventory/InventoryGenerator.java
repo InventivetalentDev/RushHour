@@ -80,7 +80,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	public InventoryMenuBuilder menuBuilder;
 	public Puzzle               puzzle;
 
-	public int moveCount = 0;
+	public int moveCount         = 0;
 	public int combinedMoveCount = 0;
 
 	public boolean finished = false;
@@ -209,7 +209,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 	public void loadPuzzle(File file) throws IOException {
 		Puzzle puzzle = Puzzle.fromJson(new FileReader(file));
 
-		String puzzleName = file.getAbsolutePath().substring(file.getAbsolutePath().indexOf("\\plugins\\RushHour\\puzzles\\") + "\\plugins\\RushHour\\puzzles\\".length());
+		String puzzleName = file.getAbsolutePath().substring(file.getAbsolutePath().indexOf(File.separator + "plugins" + File.separator + "RushHour" + File.separator + "puzzles" + File.separator) + (File.separator + "plugins" + File.separator + "RushHour" + File.separator + "puzzles" + File.separator).length());
 		if (puzzle.name == null || puzzle.name.isEmpty()) { puzzle.name = puzzleName.substring(0, puzzleName.length() - ".rh".length()); }
 		loadPuzzle(puzzle);
 	}
