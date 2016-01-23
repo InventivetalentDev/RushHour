@@ -246,6 +246,10 @@ public class Puzzle {
 		return GSON.fromJson(reader, Puzzle.class);
 	}
 
+	public static Puzzle fromJson(String string) {
+		return GSON.fromJson(string, Puzzle.class);
+	}
+
 	public static class Serializer implements JsonSerializer<Puzzle> {
 
 		@Override
