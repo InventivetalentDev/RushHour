@@ -229,7 +229,7 @@ public class Puzzle {
 
 	public String getHash() {
 		if (hash == null) {
-			hash = Base64.getEncoder().encodeToString(toJson().getBytes());
+			hash = Base64.getEncoder().encodeToString((this.name + (this.solution != null ? this.solution.toJsonArray().toString() : "[]")).getBytes());
 		}
 		return hash;
 	}
