@@ -73,7 +73,7 @@ public class Move {
 		for (GameCar car : puzzle.cars) {
 			if (car.variant == this.variant) { targetCar = car; }
 		}
-		if (targetCar == null) { throw new IllegalStateException("The puzzle does not contain the car of this move"); }
+		if (targetCar == null) { throw new IllegalStateException("The puzzle does not contain the car of this move (" + this.variant + ")"); }
 		for (int i = 0; i < this.moves; i++) {
 			puzzle.moveCar(targetCar, this.direction);
 		}
@@ -84,7 +84,7 @@ public class Move {
 		for (GameCar car : puzzle.cars) {
 			if (car.variant == this.variant) { targetCar = car; }
 		}
-		if (targetCar == null) { throw new IllegalStateException("The puzzle does not contain the car of this move"); }
+		if (targetCar == null) { throw new IllegalStateException("The puzzle does not contain the car of this move (" + this.variant + ")"); }
 		puzzle.moveCar(targetCar, this.direction);
 	}
 
