@@ -1,0 +1,72 @@
+{
+  "difficulty": "INTERMEDIATE",
+  "cars": [
+    {
+      "x": 0,
+      "y": 2,
+      "variant": "MAIN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "variant": "C_LIME",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "variant": "T_PINK",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "variant": "T_YELLOW",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "variant": "C_ORANGE",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "variant": "T_BLUE",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "variant": "T_CYAN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "variant": "C_BLUE",
+      "rotation": "VERTICAL"
+    }
+  ],
+  "solution": [
+    "BR2",
+    "PU1",
+    "QL2",
+    "CU3",
+    "RR3",
+    "QR2",
+    "PD3",
+    "BL2",
+    "CU1",
+    "XR3",
+    "AD1",
+    "BL1",
+    "PU3",
+    "RL1",
+    "QL1",
+    "OD3",
+    "XR3"
+  ]
+}
