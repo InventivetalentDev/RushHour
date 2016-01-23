@@ -1,9 +1,12 @@
 puzzle:
   inventory:
     car:
+      #Material of the cars
       material: "STAINED_CLAY"
 sign:
+  #Sign line where you want to specify the level name
   levelLine: 1
 stats:
   local:
+    #If local stats should be enabled (/rushhour stats)
     enabled: true
