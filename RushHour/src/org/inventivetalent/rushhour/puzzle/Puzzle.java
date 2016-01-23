@@ -178,7 +178,7 @@ public class Puzzle {
 	}
 
 	public void playSound(Sound sound, float volume, float pitch) {
-		playSound(sound, volume, pitch);
+		player.playSound(player.getEyeLocation(), sound, volume, pitch);
 	}
 
 	public boolean checkCollision(Car movingCar, Bounds targetBounds) {
