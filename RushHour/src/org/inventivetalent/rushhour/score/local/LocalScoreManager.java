@@ -85,7 +85,7 @@ public class LocalScoreManager extends AbstractScoreManager {
 		List<PlayerScore> scores = getPlayerScores(player);
 
 		for (PlayerScore score : scores) {
-			puzzles.add(score.getPuzzleName());
+			if (!puzzles.contains(score.getPuzzleName())) { puzzles.add(score.getPuzzleName()); }
 		}
 
 		return puzzles;
