@@ -36,6 +36,7 @@ import org.inventivetalent.rushhour.car.Variant;
 import org.inventivetalent.rushhour.exception.InvalidSolutionException;
 import org.inventivetalent.rushhour.puzzle.Direction;
 import org.inventivetalent.rushhour.puzzle.Puzzle;
+import org.inventivetalent.rushhour.puzzle.generator.inventory.InventoryGenerator;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -71,6 +72,13 @@ public class Solution {
 			@Override
 			public void run() {
 				try {
+					if (puzzle.generator instanceof InventoryGenerator) {
+						if (((InventoryGenerator) puzzle.generator).menuBuilder.getInventory().getViewers().isEmpty() || !((InventoryGenerator) puzzle.generator).menuBuilder.getInventory().getViewers().contains(puzzle.player)) {
+							cancel();
+							return;
+						}
+					}
+
 					if (currentMove >= moveList.size()) {
 						cancel();
 						return;
