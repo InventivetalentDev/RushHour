@@ -151,7 +151,7 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 						return;
 					}
 					if (puzzle.solution == null) {
-						puzzle.playSound( Sound.NOTE_STICKS, 1.0f, 0.5f);
+						puzzle.playSound(Sound.NOTE_STICKS, 1.0f, 0.5f);
 						puzzle.player.sendMessage(RushHour.messageContainer.getMessage("solution.error.missing"));
 						return;
 					}
@@ -281,6 +281,10 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 	@Override
 	public void showTo(Player player) {
+		if (this.puzzle.player != null) {
+			throw new IllegalStateException("Cannot show the puzzle to multiple players");
+		}
+
 		this.puzzle.player = player;
 
 		PlayerBeginPuzzleEvent event = new PlayerBeginPuzzleEvent(player, this.puzzle);
