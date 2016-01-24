@@ -141,6 +141,10 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 			this.menuBuilder.withItem(8, new ItemBuilder(Material.REDSTONE_TORCH_ON, 1).buildMeta().withDisplayName(RushHour.messageContainer.getMessage("inventory.game.solution.show")).item().build(), new ItemListener() {
 				@Override
 				public void onInteract(Player player0, ClickType clickType, ItemStack itemStack) {
+					if (!player0.getUniqueId().equals(puzzle.player.getUniqueId())) {//Spectator click
+						return;
+					}
+
 					if (finished || puzzle.isSolving) {
 						puzzle.playSound(Sound.NOTE_STICKS, 1.0f, 0.5f);
 						return;
@@ -227,9 +231,12 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		setCar(x, y, car.variant.getColor(), displayName, new ItemListener() {
 			@Override
 			public void onInteract(Player player0, ClickType clickType, ItemStack itemStack) {
-				if (!puzzle.player.getUniqueId().equals(InventoryGenerator.this.puzzle.player.getUniqueId())) { throw new IllegalStateException(); }
+				if (!player0.getUniqueId().equals(puzzle.player.getUniqueId())) {//Spectator click
+					return;
+				}
+
 				if (finished || puzzle.isSolving) { return; }
-				listener.onInteract(puzzle.player, clickType);
+				listener.onInteract(player0, clickType);
 			}
 		});
 	}
@@ -302,4 +309,17 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		}
 	}
 
+	@Override
+	public void spectate(Player player) {
+		if (this.puzzle.player == null) {
+			throw new IllegalStateException("Cannot spectate game with no player");
+		}
+		if (this.puzzle.player.getUniqueId() == player.getUniqueId()) {
+			throw new IllegalStateException("Spectator cannot be the same as the player");
+		}
+
+		//TODO: Remove
+		System.out.println(player + " is now spectating");
+		player.openInventory(this.menuBuilder.getInventory());
+	}
 }

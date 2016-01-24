@@ -69,4 +69,7 @@ public abstract class AbstractPuzzleGenerator {
 	public void showTo(Player player) {
 	}
 
+	public void spectate(Player player) {
+	}
+
 }
