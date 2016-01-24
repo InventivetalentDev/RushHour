@@ -28,6 +28,8 @@
 
 package org.inventivetalent.rushhour.listener;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -37,6 +39,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.inventivetalent.rushhour.puzzle.generator.AbstractPuzzleGenerator;
 import org.inventivetalent.rushhour.puzzle.generator.inventory.InventoryGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryListener implements Listener {
@@ -53,10 +56,20 @@ public class InventoryListener implements Listener {
 			}
 			Object value = values.get(0).value();
 			if (value instanceof AbstractPuzzleGenerator) {
-				AbstractPuzzleGenerator generator = (AbstractPuzzleGenerator) value;
+				final AbstractPuzzleGenerator generator = (AbstractPuzzleGenerator) value;
 				if (generator instanceof InventoryGenerator) {
 					if (((InventoryGenerator) generator).menuBuilder.getInventory().equals(inventory)) {
 						((InventoryGenerator) generator).puzzle.puzzleFinished(false);
+
+						Bukkit.getScheduler().runTaskLater(Bukkit.getPluginManager().getPlugin("RushHour"), new Runnable() {
+							@Override
+							public void run() {
+								List<HumanEntity> viewers = new ArrayList<>(((InventoryGenerator) generator).menuBuilder.getInventory().getViewers());
+								for (HumanEntity entity : viewers) {
+									entity.closeInventory();
+								}
+							}
+						}, 1);
 					}
 				}
 			}
