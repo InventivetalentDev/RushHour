@@ -323,7 +323,6 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 
 	@Override
 	public void dispose() {
-		System.out.println("dispose!");
 		resetListeners();
 		this.menuBuilder.dispose();
 	}
