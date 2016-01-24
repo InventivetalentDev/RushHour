@@ -89,8 +89,8 @@ public class SignListener implements Listener {
 			String action = "play";
 			String actionLine = sign.getLine(RushHour.SIGN_ACTION_LINE);
 			if (actionLine != null && !actionLine.isEmpty()) {
-				if (actionLine.toLowerCase().contains("play")) { action = "play"; }
-				if (actionLine.toLowerCase().contains("stats")) { action = "stats"; }
+				if (actionLine.toLowerCase().contains(RushHour.SIGN_KEY_PLAY.toLowerCase())) { action = "play"; }
+				if (actionLine.toLowerCase().contains(RushHour.SIGN_KEY_STATS.toLowerCase())) { action = "stats"; }
 			}
 
 			player.chat("/rushhour " + action + " " + levelName);

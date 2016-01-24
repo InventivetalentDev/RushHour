@@ -70,6 +70,8 @@ public class RushHour extends JavaPlugin {
 
 	public static int SIGN_LEVEL_LINE  = 1;
 	public static int SIGN_ACTION_LINE = 2;
+	public static String SIGN_KEY_PLAY = "play";
+	public static String SIGN_KEY_STATS = "stats";
 
 	public static boolean LOCAL_STATS_ENABLED = true;
 
@@ -102,6 +104,8 @@ public class RushHour extends JavaPlugin {
 		CAR_MATERIAL = Material.valueOf(getConfig().getString("puzzle.inventory.car.material"));
 		SIGN_LEVEL_LINE = getConfig().getInt("sign.levelLine");
 		SIGN_ACTION_LINE = getConfig().getInt("sign.actionLine");
+		SIGN_KEY_PLAY = getConfig().getString("sign.key.play");
+		SIGN_KEY_STATS = getConfig().getString("sign.key.stats");
 		LOCAL_STATS_ENABLED = getConfig().getBoolean("stats.local.enabled");
 		DATE_FORMAT = new SimpleDateFormat(getConfig().getString("dateFormat"));
 		SOLUTION_INTERVAL = getConfig().getLong("solutionInterval");
