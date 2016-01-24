@@ -35,11 +35,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.inventivetalent.messagebuilder.MessageBuilder;
 import org.inventivetalent.messagebuilder.MessageContainer;
 import org.inventivetalent.rushhour.listener.InventoryListener;
 import org.inventivetalent.rushhour.puzzle.Puzzle;
+import org.inventivetalent.rushhour.puzzle.generator.AbstractPuzzleGenerator;
 import org.inventivetalent.rushhour.puzzle.generator.inventory.InventoryGenerator;
 import org.inventivetalent.rushhour.puzzle.solution.Solution;
 import org.inventivetalent.rushhour.score.Score;
@@ -68,10 +70,10 @@ public class RushHour extends JavaPlugin {
 
 	public static Material CAR_MATERIAL = Material.STAINED_CLAY;
 
-	public static int SIGN_LEVEL_LINE  = 1;
-	public static int SIGN_ACTION_LINE = 2;
-	public static String SIGN_KEY_PLAY = "play";
-	public static String SIGN_KEY_STATS = "stats";
+	public static int    SIGN_LEVEL_LINE  = 1;
+	public static int    SIGN_ACTION_LINE = 2;
+	public static String SIGN_KEY_PLAY    = "play";
+	public static String SIGN_KEY_STATS   = "stats";
 
 	public static boolean LOCAL_STATS_ENABLED = true;
 
@@ -150,6 +152,13 @@ public class RushHour extends JavaPlugin {
 				.withMessage("command.stats.error.level.notFound", "§cLevel could not be found")//
 				.withMessage("command.stats.error.level.notPlayed", "§cYou haven't played this level")//
 
+				.withMessage("command.spectate.error.noPlayer", "§cYou must be a player to spectate")//
+				.withMessage("command.spectate.error.permission.command", "§cYou are not permitted to spectate")//
+				.withMessage("command.spectate.error.notPlaying", "§c%s is not playing a puzzle right now")//
+				.withMessage("command.spectate.error.player.missing", "§cPlease specify the player you want to spectate")//
+				.withMessage("command.spectate.error.player.notFound", "§cPlayer not found")//
+				.withMessage("command.spectate.info.spectating", "§eYou are noe spectating %s")//
+
 				.withMessage("inventory.title", "§c§lRush§e§lHour")//
 				.withMessage("inventory.game.finished.inner", " §2Game Finished! ")//
 				.withMessage("inventory.game.finished.outer", " §aGame Finished! ")//
@@ -209,12 +218,11 @@ public class RushHour extends JavaPlugin {
 				sender.sendMessage(messageContainer.getMessage("command.play.help"));
 				sender.sendMessage("§e/rushhour play <level name>");
 			}
-			//TODO
-			//			if (sender.hasPermission("rushhour.spectate")) {
-			//				sender.sendMessage("  ");
-			//				sender.sendMessage("§aSpectate a player");
-			//				sender.sendMessage("§e/rushhour spectate <player>");
-			//			}
+			if (sender.hasPermission("rushhour.spectate")) {
+				sender.sendMessage("  ");
+				sender.sendMessage("§aSpectate a player");
+				sender.sendMessage("§e/rushhour spectate <player>");
+			}
 			if (sender.hasPermission("rushhour.stats") && LOCAL_STATS_ENABLED) {
 				sender.sendMessage("  ");
 				sender.sendMessage("§aShow your stats");
@@ -282,6 +290,45 @@ public class RushHour extends JavaPlugin {
 
 			generator.showTo(player);
 			return true;
+		}
+
+		if ("spectate".equalsIgnoreCase(args[0])) {
+			if (!(sender instanceof Player)) {
+				sender.sendMessage(messageContainer.getMessage("command.spectate.error.noPlayer"));
+				return false;
+			}
+			if (!sender.hasPermission("rushhour.spectate")) {
+				sender.sendMessage(messageContainer.getMessage("command.spectate.error.permission.command"));
+				return false;
+			}
+			if (args.length == 1) {
+				sender.sendMessage(messageContainer.getMessage("command.spectate.error.player.missing"));
+				return false;
+			}
+			Player target = Bukkit.getPlayer(args[1]);
+			if (target == null || !target.isOnline()) {
+				sender.sendMessage(messageContainer.getMessage("command.spectate.error.player.notFound"));
+				return false;
+			}
+			if (!target.hasMetadata("RUSHHOUR_PUZZLE") || !target.hasMetadata("RUSHHOUR_GENERATOR")) {
+				sender.sendMessage(messageContainer.getMessage("command.spectate.error.notPlaying", sender.getName()));
+				return false;
+			}
+			List<MetadataValue> values = target.getMetadata("RUSHHOUR_GENERATOR");
+			if (values.isEmpty()) {
+				sender.sendMessage(messageContainer.getMessage("command.spectate.error.notPlaying", target.getName()));
+				return false;
+			}
+			Object value = values.get(0).value();
+			if (value instanceof AbstractPuzzleGenerator) {
+				AbstractPuzzleGenerator generator = (AbstractPuzzleGenerator) value;
+				generator.spectate((Player) sender);
+
+				sender.sendMessage(messageContainer.getMessage("command.spectate.info.spectating", target.getName()));
+				return true;
+			}
+			sender.sendMessage(messageContainer.getMessage("command.spectate.error.notPlaying"));
+			return false;
 		}
 
 		if ("stats".equalsIgnoreCase(args[0])) {

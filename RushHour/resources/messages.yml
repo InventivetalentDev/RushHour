@@ -44,6 +44,17 @@ command:
       permission:
         command: "&cYou are not permitted to view stats"
         other: "&cYou are not permitted to view stats of other players"
+  spectate:
+    info:
+      spectating: "&eYou are now spectating %s"
+    error:
+      noPlayer: "&cYou must be a player to spectate"
+      notPlaying: "&c%s is not playing a puzzle right now"
+      player:
+        missing: "&cPlease specify the player you want to spectate"
+        notFound: "&cPlayer not found"
+      permission:
+        command: "&cYou are not permitted to spectate"
 
 inventory:
   title: "&c&lRush&e&lHour"
