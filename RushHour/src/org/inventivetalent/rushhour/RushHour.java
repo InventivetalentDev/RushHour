@@ -157,7 +157,7 @@ public class RushHour extends JavaPlugin {
 				.withMessage("command.spectate.error.notPlaying", "§c%s is not playing a puzzle right now")//
 				.withMessage("command.spectate.error.player.missing", "§cPlease specify the player you want to spectate")//
 				.withMessage("command.spectate.error.player.notFound", "§cPlayer not found")//
-				.withMessage("command.spectate.info.spectating", "§eYou are noe spectating %s")//
+				.withMessage("command.spectate.info.spectating", "§eYou are now spectating %s")//
 
 				.withMessage("inventory.title", "§c§lRush§e§lHour")//
 				.withMessage("inventory.game.finished.inner", " §2Game Finished! ")//
