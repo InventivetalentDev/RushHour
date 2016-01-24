@@ -72,4 +72,7 @@ public abstract class AbstractPuzzleGenerator {
 	public void spectate(Player player) {
 	}
 
+	public void dispose() {
+	}
+
 }

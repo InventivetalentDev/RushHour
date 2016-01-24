@@ -213,7 +213,7 @@ public class Puzzle {
 			this.player.removeMetadata("RUSHHOUR_GENERATOR", Bukkit.getPluginManager().getPlugin("RushHour"));
 			this.player.removeMetadata("RUSHHOUR_PUZZLE", Bukkit.getPluginManager().getPlugin("RushHour"));
 
-			this.generator.resetListeners();
+			this.generator.dispose();
 
 			Runtime.getRuntime().gc();
 		} else {

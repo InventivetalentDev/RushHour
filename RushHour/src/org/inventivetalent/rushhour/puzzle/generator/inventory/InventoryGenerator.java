@@ -318,8 +318,13 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 			throw new IllegalStateException("Spectator cannot be the same as the player");
 		}
 
-		//TODO: Remove
-		System.out.println(player + " is now spectating");
 		player.openInventory(this.menuBuilder.getInventory());
+	}
+
+	@Override
+	public void dispose() {
+		System.out.println("dispose!");
+		resetListeners();
+		this.menuBuilder.dispose();
 	}
 }
