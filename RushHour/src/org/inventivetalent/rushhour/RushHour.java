@@ -83,6 +83,20 @@ public class RushHour extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		//ItemBuilder and MessageBuilder are included in the jar file, so just check if the MenuBuilder plugin is enabled
+		if (!Bukkit.getPluginManager().isPluginEnabled("MenuBuilder") || !doesClassExist("org.inventivetalent.menubuilder.MenuBuilder") || !doesClassExist("org.inventivetalent.itembuilder.ItemBuilder") || !doesClassExist("org.inventivetalent.messagebuilder.MessageBuilder")) {
+			getLogger().severe("*******************************************");
+			getLogger().severe("                                           ");
+			getLogger().severe("          This plugin depends on           ");
+			getLogger().severe(" MenuBuilder, ItemBuilder & MessageBuilder ");
+			getLogger().severe("         please download them here:        ");
+			getLogger().severe("  https://r.spiget.org/12995/12502/12821   ");
+			getLogger().severe("                                           ");
+			getLogger().severe("*******************************************");
+			Bukkit.getPluginManager().disablePlugin(this);
+			return;
+		}
+
 		saveDefaultConfig();
 
 		CAR_MATERIAL = Material.valueOf(getConfig().getString("puzzle.inventory.car.material"));
@@ -469,6 +483,14 @@ public class RushHour extends JavaPlugin {
 				}
 			}
 			jar.close();
+		}
+	}
+
+	boolean doesClassExist(String name) {
+		try {
+			return Class.forName(name) != null;
+		} catch (ClassNotFoundException e) {
+			return false;
 		}
 	}
 
