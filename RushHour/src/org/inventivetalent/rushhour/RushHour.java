@@ -484,6 +484,9 @@ public class RushHour extends JavaPlugin {
 			if (sender.hasPermission("rushhour.play")) {
 				list.add("play");
 			}
+			if (sender.hasPermission("rushhour.spectate")) {
+				list.add("spectate");
+			}
 			if (sender.hasPermission("rushhour.stats")) {
 				list.add("stats");
 			}
@@ -497,6 +500,17 @@ public class RushHour extends JavaPlugin {
 							String puzzleName = file.getAbsolutePath().substring(file.getAbsolutePath().indexOf(File.separator + "plugins" + File.separator + "RushHour" + File.separator + "puzzles" + File.separator) + (File.separator + "plugins" + File.separator + "RushHour" + File.separator + "puzzles" + File.separator).length());
 							puzzleName = puzzleName.substring(0, puzzleName.length() - ".rh".length());
 							list.add(puzzleName);
+						}
+					}
+				}
+			}
+			if ("spectate".equalsIgnoreCase(args[0])) {
+				if (sender.hasPermission("rushhour.spectate")) {
+					for (Player player : Bukkit.getOnlinePlayers()) {
+						if (((Player) sender).canSee(player)) {
+							if (player.hasMetadata("RUSHHOUR_PUZZLE")) {
+								list.add(player.getName());
+							}
 						}
 					}
 				}
