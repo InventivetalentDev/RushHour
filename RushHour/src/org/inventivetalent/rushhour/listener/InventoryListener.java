@@ -33,9 +33,11 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.metadata.MetadataValue;
+import org.inventivetalent.rushhour.RushHour;
 import org.inventivetalent.rushhour.puzzle.generator.AbstractPuzzleGenerator;
 import org.inventivetalent.rushhour.puzzle.generator.inventory.InventoryGenerator;
 
@@ -73,6 +75,18 @@ public class InventoryListener implements Listener {
 					}
 				}
 			}
+		}
+	}
+
+	@EventHandler
+	public void onInventoryClick(InventoryClickEvent event) {
+		Player player = (Player) event.getWhoClicked();
+		Inventory inventory = event.getClickedInventory();
+		Inventory inventory1 = event.getInventory();
+
+		String title = RushHour.messageContainer.getMessage("inventory.title");
+		if ((inventory != null && title.equals(inventory.getTitle())) || (inventory1 != null && title.equals(inventory1.getTitle()))) {
+			event.setCancelled(true);
 		}
 	}
 
