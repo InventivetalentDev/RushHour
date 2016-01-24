@@ -311,7 +311,7 @@ public class RushHour extends JavaPlugin {
 				return false;
 			}
 			if (!target.hasMetadata("RUSHHOUR_PUZZLE") || !target.hasMetadata("RUSHHOUR_GENERATOR")) {
-				sender.sendMessage(messageContainer.getMessage("command.spectate.error.notPlaying", sender.getName()));
+				sender.sendMessage(messageContainer.getMessage("command.spectate.error.notPlaying", target.getName()));
 				return false;
 			}
 			List<MetadataValue> values = target.getMetadata("RUSHHOUR_GENERATOR");
