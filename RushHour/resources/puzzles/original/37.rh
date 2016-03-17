@@ -1,0 +1,132 @@
+{
+  "difficulty": "EXPERT",
+  "cars": [
+    {
+      "x": 1,
+      "y": 2,
+      "variant": "MAIN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "variant": "C_LIME",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "variant": "C_ORANGE",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "variant": "C_PINK",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "variant": "T_BLUE",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "variant": "C_BLACK",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "variant": "T_CYAN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "variant": "C_PURPLE",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "variant": "C_GREEN",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "variant": "C_SILVER",
+      "rotation": "HORIZONTAL"
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "variant": "T_YELLOW",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "variant": "T_PINK",
+      "rotation": "VERTICAL"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "variant": "C_BLUE",
+      "rotation": "HORIZONTAL"
+    }
+  ],
+  "solution": [
+    "GR1",
+    "QD1",
+    "XL1",
+    "BD1",
+    "CL2",
+    "PU1",
+    "OU1",
+    "RR2",
+    "BD2",
+    "XR1",
+    "DR1",
+    "QU2",
+    "GL1",
+    "BD1",
+    "RL2",
+    "OD1",
+    "CR1",
+    "AR1",
+    "QU1",
+    "RL1",
+    "EU3",
+    "RR1",
+    "QD2",
+    "AL1",
+    "CL1",
+    "OU1",
+    "RR2",
+    "BU1",
+    "GR1",
+    "QD1",
+    "XL1",
+    "DL1",
+    "BU2",
+    "HL1",
+    "FL2",
+    "RL2",
+    "PD3",
+    "OD2",
+    "CR2",
+    "EU1",
+    "BU1",
+    "XR2",
+    "QU1",
+    "GL1",
+    "HL1",
+    "OD1",
+    "XR4"
+  ]
+}
