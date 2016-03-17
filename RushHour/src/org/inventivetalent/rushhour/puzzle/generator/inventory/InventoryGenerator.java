@@ -146,21 +146,21 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 					}
 
 					if (finished || puzzle.isSolving) {
-						puzzle.playSound(Sound.NOTE_STICKS, 1.0f, 0.5f);
+						puzzle.playSound(Sound.BLOCK_NOTE_HAT, 1.0f, 0.5f);
 						return;
 					}
 					if (!puzzle.player.hasPermission("rushhour.solution." + puzzle.getLevelPerm())) {
-						puzzle.playSound(Sound.NOTE_STICKS, 1.0f, 0.5f);
+						puzzle.playSound(Sound.BLOCK_NOTE_HAT, 1.0f, 0.5f);
 						puzzle.player.sendMessage(RushHour.messageContainer.getMessage("solution.error.permission.level"));
 						return;
 					}
 					if (puzzle.solution == null) {
-						puzzle.playSound(Sound.NOTE_STICKS, 1.0f, 0.5f);
+						puzzle.playSound(Sound.BLOCK_NOTE_HAT, 1.0f, 0.5f);
 						puzzle.player.sendMessage(RushHour.messageContainer.getMessage("solution.error.missing"));
 						return;
 					}
 
-					puzzle.playSound(Sound.NOTE_STICKS, 1.0f, 1.0f);
+					puzzle.playSound(Sound.BLOCK_NOTE_HAT, 1.0f, 1.0f);
 
 					puzzle.player.sendMessage(RushHour.messageContainer.getMessage("solution.info.solving"));
 					puzzle.solution.solve(puzzle, RushHour.SOLUTION_INTERVAL);
@@ -280,9 +280,9 @@ public class InventoryGenerator extends AbstractPuzzleGenerator {
 		generateBase();
 
 		if (solved) {
-			puzzle.playSound(Sound.NOTE_PLING, 1.0f, 2.0f);
-			puzzle.playSound(Sound.CLICK, 1.0f, 1.0f);
-			puzzle.playSound(Sound.LEVEL_UP, 0.8f, 1.5f);
+			puzzle.playSound(Sound.BLOCK_NOTE_PLING, 1.0f, 2.0f);
+			puzzle.playSound(Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
+			puzzle.playSound(Sound.ENTITY_PLAYER_LEVELUP, 0.8f, 1.5f);
 		}
 	}
 

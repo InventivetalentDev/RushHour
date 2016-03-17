@@ -156,14 +156,14 @@ public class Puzzle {
 	public void moveCar(GameCar car, Direction direction) {
 		Bounds target = car.bounds.shift(direction);
 		if (!checkCollision(car, target)) {
-			playSound(Sound.NOTE_BASS, 0.8f, 0.8f);
-			playSound(Sound.NOTE_BASS_DRUM, 0.5f, 0.7f);
+			playSound(Sound.BLOCK_NOTE_BASS, 0.8f, 0.8f);
+			playSound(Sound.BLOCK_NOTE_BASEDRUM, 0.5f, 0.7f);
 			return;
 		}
 		car.bounds = target;
 
-		playSound(Sound.NOTE_STICKS, 1.0f, 0.8f);
-		playSound(Sound.PISTON_EXTEND, 0.05f, 0.7f);
+		playSound(Sound.BLOCK_NOTE_HAT, 1.0f, 0.8f);
+		playSound(Sound.BLOCK_PISTON_EXTEND, 0.05f, 0.7f);
 
 		playerSolution.trackPlayerMove(null, car.variant, direction, 1);
 		generator.updateMoves(playerSolution.combineMoves().moves.size(), playerSolution.moves.size());
